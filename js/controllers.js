@@ -42,7 +42,7 @@ function LedCtrl($scope, $http, socket, $timeout, Effects, Leds, Grid) {
 			}
 			console.log($scope.effects);
 	}
-	var url = "http://192.168.1.6:8888/effects";
+	var url = "http://leds.dev:8888/effects";
 	$http.jsonp(url);
 	
 	//Let's get the LED's via the Leds service.
@@ -54,7 +54,7 @@ function LedCtrl($scope, $http, socket, $timeout, Effects, Leds, Grid) {
 	// 
 	var updateLeds = $timeout(function myFunction() {
 		    // do sth
-		var url = "http://192.168.1.6:8888/leds";
+		var url = "http://leds.dev:8888/leds";
 		// console.log('timeout');
 		$http.jsonp(url);
 	     updateLeds = $timeout(myFunction, 2000);

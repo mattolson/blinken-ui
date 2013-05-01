@@ -3,8 +3,7 @@
 blink
 
 	.factory('socket', function ($rootScope) {
-    var socket = io.connect('192.168.1.6:8888');
-		// var socket = io.connect('localhost:8888');
+    var socket = io.connect('leds.dev:8888');
     return {
       on: function (eventName, callback) {
 						socket.on(eventName, function () {  
@@ -55,14 +54,12 @@ blink
 	//These would be made more robust, would return an object with some useful getters/setters
 	.factory('Leds', function ($resource) {
 		var data = null;
-		var Leds = $resource('http://192.168.1.6:8888/leds', {8888: ':8888'} , { get: {method: 'JSONP'} });
-		// var Leds = $resource('http://localhost:8888/leds.jsonp', {8888: ':8888'} ,{ get: {method: 'JSONP'} } ); //for local testing.
+		var Leds = $resource('http://leds.dev:8888/leds', {8888: ':8888'} , { get: {method: 'JSONP'} });
 				return Leds;
 	})
 	
 	.factory('Effects', function ($resource) {
-		// var Effects = $resource('http://192.168.1.6:8888/effects', {8888: ':8888'} , { get: {method: 'JSONP'} });
-		// 		// var Effects = $resource('http://localhost:8888/effects.jsonp', {8888: ':8888'} ,{ get: {method: 'JSONP'} } ); //for local testing.
+		// var Effects = $resource('http://leds.dev:8888/effects', {8888: ':8888'} , { get: {method: 'JSONP'} });
 		// 		return Effects;
 		return {
 			list : function($scope){
@@ -74,7 +71,7 @@ blink
 							}
 						}
 				}
-				var url = "http://192.168.1.6:8888/effects";
+				var url = "http://leds.dev:8888/effects";
 				$http.jsonp(url);
 			}
 		}
