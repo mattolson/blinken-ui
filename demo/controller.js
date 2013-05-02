@@ -53,6 +53,8 @@ function PixelPad($scope, $timeout, Frame){
 					// frame.virgin = $scope.isPixels();
 			
 			$scope.history.unshift(frame);
+			
+			if($scope.history.length >= 100) $scope.history.pop();
 		};
 		
 		$scope.purge = function(){
