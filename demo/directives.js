@@ -1,23 +1,18 @@
 'use strict';
-var demo = angular.module('PixelPusher', []);
+var demo = angular.module('app', []);
 
 demo
-	.directive('pixelpad', function() {
-    'use strict';
-
-    return {
-       restrict: 'A',
-       scope: {
-           value: '=ngModel',
-       },
-       link:function($scope,elm,$attrs,uiEvent ) {
-	
-				var $pad = $(elm);
-				var key = $attrs.key;			
-				$scope.pixels.push = [];
+	.directive('timeline', function(){
+		return {
+			link: function($scope, $el) {
+				$scope.$watch('history', function(){
+					$scope.timelineWidth += 102;
+				});
 				
+				$($el).css('width' , $(document).width)
 			}
-   }
+		}
+	})
 
 	.directive('acc', function(){
 		
@@ -32,7 +27,7 @@ demo
 			}
 		};
 		
-	});
+	})
 
 	.directive('shake', function(){
 		
