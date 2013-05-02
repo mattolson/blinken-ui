@@ -58,6 +58,20 @@ blink
 				return Leds;
 	})
 	
+	.factory('Layers', function ($resource) {
+		var data = null;
+		var	Layers = $resource('http://192.168.1.6:8888/layers/:id', 
+					{8888: ':8888'} , 
+					{ 
+						get: {method: 'JSONP'},
+						save: {method: 'PUT'}
+					}
+				);
+		return Leds;
+	})
+	
+	
+	
 	.factory('Effects', function ($resource) {
 		// var Effects = $resource('http://leds.dev:8888/effects', {8888: ':8888'} , { get: {method: 'JSONP'} });
 		// 		return Effects;
