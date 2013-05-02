@@ -1,6 +1,8 @@
 //It's 12:00am
+'use strict';
+var demo = angular.module('PixelPusher', []);
 
-blink
+demo
 	.controller('PixelPad', function($timeout, AddFrame){
 		
 		$scope.active = false;

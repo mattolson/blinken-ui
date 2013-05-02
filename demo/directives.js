@@ -1,6 +1,7 @@
 'use strict';
+var demo = angular.module('PixelPusher', []);
 
-blink
+demo
 	.directive('pixelpad', function() {
     'use strict';
 
