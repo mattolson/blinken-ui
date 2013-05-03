@@ -11,13 +11,12 @@ demo
 			{ 
 				'id' : 4, 
 				'port' : PORT
+			},
+			{ 
+				update: { 
+					method:'PUT'
+				}
 			}
-			// { 
-			// 				update: { 
-			// 					method:'PUT',
-			// 					headers: {'Content-Type':'form-data; charset=UTF-8'}  
-			// 				}
-			// 			}
 		);
 	})
 	

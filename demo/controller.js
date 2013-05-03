@@ -158,8 +158,9 @@ function PixelPad($scope, $timeout, Frame, Layers){
 		//This updates the server every so often.
 		var update = function() {
 			
-		$scope.save = function(){
-			var frame = Frame.save({
+		$scope.addFrame = function(){
+			
+			var frame = Frame.update({},{
 				source : {
 					name : 'pixel_pulse',
 					options : {
@@ -203,7 +204,7 @@ function PixelPad($scope, $timeout, Frame, Layers){
 			//
 			// console.log(frame);
 			
-			if($scope.isPixels()) $scope.save();
+			if($scope.isPixels()) $scope.addFrame();
 			
 			//Cache the data (history)
 			$scope.cache();
