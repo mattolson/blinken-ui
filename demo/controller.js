@@ -7,7 +7,7 @@ var demo = angular.module('app', ['ngResource']);
 
 function PixelPad($scope, $timeout, Frame){
 		
-		console.log('Controller: PixelPad');
+		//console.log('Controller: PixelPad');
 		
 		$scope.defaults = [255,255,255];
 		
@@ -28,7 +28,7 @@ function PixelPad($scope, $timeout, Frame){
 		$scope.idleThreshold = 30;
 		
 		var updateCallback = function(){
-			console.log('Node informed.');
+			//console.log('Node informed.');
 		};
 		
 		//Cancels timeout in case views disrupts us, fail safe
@@ -72,14 +72,14 @@ function PixelPad($scope, $timeout, Frame){
 		//method to turn activate and deactive an active pixel.
 		$scope.togglePixel = function(key){
 			var state = ( typeof $scope.pixels[key] === 'array' );
-			console.log('toggle pixel '+key+'. Present state: '+state);
+			//console.log('toggle pixel '+key+'. Present state: '+state);
 		
-			// console.log('hsv '+$scope.hsvToRGB( $scope.motionToHSV() ));	
+			// //console.log('hsv '+$scope.hsvToRGB( $scope.motionToHSV() ));	
 			//If on, turn off ; if off, turn on.
 			// $scope.pixels[key] = (state) ? null : $scope.hsvToRGB( $scope.motionToHSV() );
 			$scope.pixels[key] = (state) ? null : [255,255,255];
 			
-			console.log($scope.history)
+			//console.log($scope.history)
 		
 		};
 		
@@ -129,9 +129,9 @@ function PixelPad($scope, $timeout, Frame){
 		cancelRefresh = $timeout(function update() {
 			//If running a cheat/hack (lioke the shake=sparkle hack) you can pause the timeline here.
 			if($scope.pause) return;			
-			console.log('refreshing');
+			//console.log('refreshing');
 			
-			console.log('Total pixels per frame: '+$scope.pixels.length);
+			//console.log('Total pixels per frame: '+$scope.pixels.length);
 			//Activity based "sessions."
 			$scope.session();
 			

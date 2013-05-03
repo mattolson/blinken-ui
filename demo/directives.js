@@ -15,7 +15,7 @@ demo
 	})
 
 	.directive('acc', function(){
-		console.log('Binding accelerometer');
+		//console.log('Binding accelerometer');
 		return {
 			link: function($scope) {
 		 		$(window).bind('acc', function(e) {
@@ -33,7 +33,7 @@ demo
 		
 		return {
 			link: function($scope, Shake, $timeout){
-				console.log('Binding shake.');
+				//console.log('Binding shake.');
 				window.addEventListener('shake', shakeevent, false);
 
 				//function to call when shake occurs
@@ -88,7 +88,7 @@ demo
 	      var opts = $parse(attr[directiveName + 'Opts'])(scope, {});
 	      element.hammer(opts).bind(eventName, function(event) {
 	        scope.$apply(function() {
-	          console.log("Doing stuff", event);
+	          //console.log("Doing stuff", event);
 	          fn(scope, {$event: event});
 	        });
 	      });
