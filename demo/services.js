@@ -1,5 +1,5 @@
 'use strict';
-var demo = angular.module('app', ['ngResource']);
+// var demo = angular.module('app', ['ngResource']);
 
 demo
 

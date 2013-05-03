@@ -1,25 +1,18 @@
+console.log('Directives.js!');
+
 'use strict';
-var demo = angular.module('app', ['ngResource']);
 
 demo
 	.directive('timeline', function(){
-		return {
-			link: function($scope, $el) {
-				$scope.$watch('history', function(){
-					$scope.timelineWidth += 102;
-				});
-				
-				$($el).css('width' , $(document).width)
-			}
-		}
 	})
 
-	.directive('acc', function(){
+	.directive('accData', function(){
 		'use strict';
-		console.log('Binding accelerometer');
+		// console.log('Binding accelerometer');
 		return {
 			link: function($scope) {
 		 		$(window).bind('acc', function(e) {
+					console.log(e);
 			  	$scope.acc = {};
 					if(e.accX) $scope.acc.x = e.accX;
 					if(e.accY) $scope.acc.y = e.accY;

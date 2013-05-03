@@ -2,8 +2,8 @@ var BLACK = [0,0,0];
 var WHITE = [255,255,255];
 	
 //It's 12:00am
-'use strict';
-var demo = angular.module('app', ['ngResource']);
+
+demo = angular.module('app', ['ngResource']);
 
 function PixelPad($scope, $timeout, Frame){
 		

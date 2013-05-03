@@ -11,12 +11,14 @@
 	<![endif]-->
 	
 </head>
-<body ng-controller="PixelPad" acc shake>
+<body ng-controller="PixelPad">
+	
+	<div acc-data>
 	
 	<section id="left" class="controller">
-			{{$scope.acc.x}}<br/>
-			{{$scope.acc.y}}<br/>
-			{{$scope.acc.z}}
+			{{acc.x}}<br/>
+			{{acc.y}}<br/>
+			{{acc.z}}
 	</section>
 	
 	<section id="center" class="timeline">
@@ -54,6 +56,8 @@
 				</div>
 		
 	</section>
+	
+	</div>
 
 	<!-- Jquery (ui) -->
 	<script src="http://code.jquery.com/jquery-1.7.2.min.js" type="text/javascript"></script>
