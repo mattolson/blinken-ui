@@ -31,6 +31,7 @@ demo
 		// 'use strict';
 		return {
 			link: function($scope, $http, Shake, $timeout){
+	
 				//console.log('Binding shake.');
 				window.addEventListener('shake', shakeevent, false);
 	
