@@ -53,7 +53,7 @@ function PixelPad($scope, $timeout, Frame, Layers){
 		$scope.isPixels = function(){
 			var p;
 			for(p=0;p<3;p++) {
-				if(typeof $scope.pixels[p] === 'array') return true;
+				if($scope.pixels[p] !== null) return true;
 			}
 		}
 		
@@ -170,6 +170,8 @@ function PixelPad($scope, $timeout, Frame, Layers){
 			}, function(frame, response){
 					console.log('Node informed, it says '+response + ' for '+ frame);
 					////console.log('Node informed.');
+			}, function(status, error){
+				console.log(status+error);
 			});
 			
 			console.log(frame);
