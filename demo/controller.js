@@ -52,7 +52,6 @@ function PixelPad($scope, $timeout, Frame){
 		$scope.cache = function(){
 			var frame = {};
 					frame.color = $scope.pixels;
-					// frame.virgin = $scope.isPixels();
 			
 			$scope.history.unshift(frame);
 			
@@ -135,12 +134,12 @@ function PixelPad($scope, $timeout, Frame){
 			//Activity based "sessions."
 			$scope.session();
 			
-			var frame = Frame.update({
-				'source' : {
-					'name' : 'pixel_pulse', 
-					'colors': $scope.pixels
-				}
-			}, updateCallback);
+			// var frame = Frame.update({
+			// 				'source' : {
+			// 					'name' : 'pixel_pulse', 
+			// 					'colors': $scope.pixels
+			// 				}
+			// 			}, updateCallback);
 			
 			//Cache the data (history)
 			$scope.cache();
