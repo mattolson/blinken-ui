@@ -22,7 +22,7 @@ function PixelPad($scope, $timeout, Frame, Layers){
 		$scope.history_limit = 13;
 		
 		// $scope.hsv = [];
-		$scope.acc = {};
+		$scope.acc = { x : 0, y : 0, z : 0 };
 		
 		$scope.period = 250;
 		
