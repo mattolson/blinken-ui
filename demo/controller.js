@@ -161,16 +161,16 @@ function PixelPad($scope, $timeout, Frame, Layers){
 		var update = function() {
 			
 		$scope.save = function(){
-			var frame = Frame.update({
-				'source' : {
-					'name' : 'pixel_pulse',
-					'options' : {
-						'colors': $scope.pixels,
-						'period' : $scope.period
+			var frame = Frame.save({
+				source : {
+					name : 'pixel_pulse',
+					options : {
+						colors: $scope.pixels,
+						period : $scope.period
 					}
 				}
-			}, function(response, erp){
-					console.log('Node informed, it says '+response + ' AND '+erp);
+			}, function(frame, response){
+					console.log('Node informed, it says '+response + ' for '+ frame);
 					////console.log('Node informed.');
 			});
 			
