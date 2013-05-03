@@ -42,7 +42,7 @@
 			ng-mousedown="togglePixel(0)" 
 			hm-tap="togglePixel(0)"
 			hm-hold="holdPixel(0)"
-			style="background:hsl({{pixels[0][0]}},{{pixels[0][1]}}, {{pixels[0][2]}})">
+			style="background:hsl({{hsv[0]}},{{hsv[1]}}, {{hsv[2]}})">
 			</div>
 			
 		<div 
@@ -51,7 +51,7 @@
 			ng-mousedown="togglePixel(1)"
 			hm-tap="togglePixel(1)" 
 			hm-hold="holdPixel(1)"
-			style="background:hsl({{pixels[1][0]}},{{pixels[1][1]}}, {{pixels[1][2]}})">
+			style="background:hsl({{hsv[0]}},{{hsv[1]}}, {{hsv[2]}})">
 				</div>
 				
 		<div 
@@ -60,7 +60,7 @@
 			ng-mousedown="togglePixel(2)" 
 			hm-tap="togglePixel(2)"	
 			hm-hold="holdPixel(2)"
-			style="background:hsl({{pixels[2][0]}},{{pixels[2][1]}}, {{pixels[2][2]}})">
+			style="background:hsl({{hsv[0]}},{{hsv[1]}}, {{hsv[2]}})">
 				</div>
 		
 	</section>
