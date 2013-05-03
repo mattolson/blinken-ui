@@ -1,18 +1,18 @@
-console.log('Directives.js!');
+//console.log('Directives.js!');
 
 'use strict';
 
 demo
-	.directive('timeline', function(){
-	})
+	// .directive('timeline', function(){
+	// })
 
 	.directive('accData', function(){
 		'use strict';
-		// console.log('Binding accelerometer');
+		// //console.log('Binding accelerometer');
 		return {
 			link: function($scope) {
 		 		$(window).bind('acc', function(e) {
-					console.log(e);
+					//console.log(e);
 			  	$scope.acc = {};
 					if(e.accX) $scope.acc.x = e.accX;
 					if(e.accY) $scope.acc.y = e.accY;
@@ -22,39 +22,39 @@ demo
 		};
 		
 	})
-
-	.directive('shake', function(){
-		'use strict';
-		return {
-			link: function($scope, Shake, $timeout){
-				console.log('Binding shake.');
-				window.addEventListener('shake', shakeevent, false);
-
-				//function to call when shake occurs
-				function shakeevent () {
-					$scope.pause = true;
-					Shake.update();
-					$timeout(function(){
-						$scope.pause = false;
-					}, 2000)
-				}
-				
-			}
-		}
-		
-	})
+	// 
+	// .directive('shake', function(){
+	// 	'use strict';
+	// 	return {
+	// 		link: function($scope, Shake, $timeout){
+	// 			//console.log('Binding shake.');
+	// 			window.addEventListener('shake', shakeevent, false);
+	// 
+	// 			//function to call when shake occurs
+	// 			function shakeevent () {
+	// 				$scope.pause = true;
+	// 				Shake.update();
+	// 				$timeout(function(){
+	// 					$scope.pause = false;
+	// 				}, 2000)
+	// 			}
+	// 			
+	// 		}
+	// 	}
+	// 	
+	// })
 	
-	.directive('speed', function(){
-		return {
-			
-			link : function($scope, $elm){
-				$scope.$watch(function(value){
-					
-				})
-			}
-		}
-	});
-	
+	// .directive('speed', function(){
+	// 	return {
+	// 		
+	// 		link : function($scope, $elm){
+	// 			$scope.$watch(function(value){
+	// 				
+	// 			})
+	// 		}
+	// 	}
+	// });
+	// 
 	
 	/**
 	 * Inspired by AngularJS' implementation of "click dblclick mousedown..." 
@@ -82,7 +82,7 @@ demo
 	      var opts = $parse(attr[directiveName + 'Opts'])(scope, {});
 	      element.hammer(opts).bind(eventName, function(event) {
 	        scope.$apply(function() {
-	          //console.log("Doing stuff", event);
+	          ////console.log("Doing stuff", event);
 	          fn(scope, {$event: event});
 	        });
 	      });

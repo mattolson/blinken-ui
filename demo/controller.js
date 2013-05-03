@@ -6,8 +6,10 @@ var WHITE = [255,255,255];
 demo = angular.module('app', ['ngResource']);
 
 function PixelPad($scope, $timeout, Frame){
+	
+		$scope.lightness = 20;
 		
-		//console.log('Controller: PixelPad');
+		////console.log('Controller: PixelPad');
 		
 		$scope.defaults = [255,255,255];
 		
@@ -29,7 +31,7 @@ function PixelPad($scope, $timeout, Frame){
 		$scope.idleThreshold = 30;
 		
 		var updateCallback = function(){
-			//console.log('Node informed.');
+			////console.log('Node informed.');
 		};
 		
 		//Cancels timeout in case views disrupts us, fail safe
@@ -72,69 +74,76 @@ function PixelPad($scope, $timeout, Frame){
 		
 		//method to turn activate and deactive an active pixel.
 		$scope.togglePixel = function(key){
-			var state = ( typeof $scope.pixels[key] === 'array' );
-			//console.log('toggle pixel '+key+'. Present state: '+state);
+			var state = false;
+			// var state = $scope.pixels[key] !== null;
+			////console.log('toggle pixel '+key+'. Present state: '+state);
 		
-			// //console.log('hsv '+$scope.hsvToRGB( $scope.motionToHSV() ));	
+			console.log('hsv '+$scope.motionToHSV() );	
 			//If on, turn off ; if off, turn on.
-			// $scope.pixels[key] = (state) ? null : $scope.hsvToRGB( $scope.motionToHSV() );
-			$scope.pixels[key] = (state) ? null : [255,255,255];
+			$scope.pixels[key] = (state) ? null :  $scope.motionToHSV() ;
 			
-			//console.log($scope.history)
+			//console.log('RGB' + $scope.hsvToRGB( $scope.motionToHSV() ) );
+			// $scope.pixels[key] = (state) ? null : [255,255,255];
+			
+			////console.log($scope.history)
 		
 		};
 		
 		//Normalizes accelerometer values between 0 & 255
 		$scope.normalize = function(x){
-			return Math.round( 1 + (x-(-2.5)) * (255-1) / ((2.5)-(-2.5)) );
+			console.log( Math.round( 1 + (x-(-85)) * (255-1) / ((275)-(-85)) ) );
+			return Math.round( 1 + (x-(-85)) * (255-1) / ((275)-(-85)) );
 		};
 		
 		//Take acceleratomenter data and transform into HSV
 		$scope.motionToHSV = function(){
-			if($scope.acc.length) {
-				var a = $scope.normalize($scope.acc.x);
-				var b = $scope.normalize($scope.acc.y);
-				var c = $scope.normalize($scope.acc.z);
-				return [a,b,c]
+			console.log('h'+$scope.normalize(Math.round($scope.acc.x)))
+			console.log('s'+$scope.normalize(Math.round($scope.acc.y)))
+
+			if($scope.acc) {
+				var a = $scope.normalize(Math.round($scope.acc.x));
+				var b = $scope.normalize(Math.round($scope.acc.y));
+				var c = $scope.lightness;
+				return [a,b,c];
 			} else {
-				return [255,255,255]
+				return [255,255,255];
 			}
 		};
 		
-		$scope.hsvToRGB = function(hsv) {
-		  var h = hsv.hue, s = hsv.sat, v = hsv.val;
-		  var rgb, i, data = [];
-		  if (s === 0) {
-		    rgb = [v,v,v];
-		  } else {
-		    h = h / 60;
-		    i = Math.floor(h);
-		    data = [v*(1-s), v*(1-s*(h-i)), v*(1-s*(1-(h-i)))];
-		    switch(i) {
-		      case 0: return [v, data[2], data[0]];
-		      case 1: return [data[1], v, data[0]];
-		      case 2: return [data[0], v, data[2]];
-		      case 3: return [data[0], data[1], v];
-		      case 4: return [data[2], data[0], v];
-		      default: return [v, data[0], data[1]];
-		    }
-		  }
-		  // return '#' + rgb.map(function(x){ 
-		  // 		    return ("0" + Math.round(x*255).toString(16)).slice(-2);
-		  // 		  }).join('');
-		};
-		
+		// $scope.hsvToRGB = function(hsv) {
+		// 	  var h = hsv.hue, s = hsv.sat, v = hsv.val;
+		// 	  var rgb, i, data = [];
+		// 	  if (s === 0) {
+		// 	    rgb = [v,v,v];
+		// 	  } else {
+		// 	    h = h / 60;
+		// 	    i = Math.floor(h);
+		// 	    data = [v*(1-s), v*(1-s*(h-i)), v*(1-s*(1-(h-i)))];
+		// 	    switch(i) {
+		// 	      case 0: return [v, data[2], data[0]];
+		// 	      case 1: return [data[1], v, data[0]];
+		// 	      case 2: return [data[0], v, data[2]];
+		// 	      case 3: return [data[0], data[1], v];
+		// 	      case 4: return [data[2], data[0], v];
+		// 	      default: return [v, data[0], data[1]];
+		// 	    }
+		// 	  }
+		// 	  // return '#' + rgb.map(function(x){ 
+		// 	  // 		    return ("0" + Math.round(x*255).toString(16)).slice(-2);
+		// 	  // 		  }).join('');
+		// 	};
+		// 	
 		//This updates the server every so often.
 		var update = function() {
 	   
 		cancelRefresh = $timeout(function update() {
 			//If running a cheat/hack (lioke the shake=sparkle hack) you can pause the timeline here.
 			if($scope.pause) return;			
-			//console.log('refreshing');
+			////console.log('refreshing');
 			
-			console.log('total frames in history: '+$scope.history.length)
+			//console.log('total frames in history: '+$scope.history.length)
 			
-			//console.log('Total pixels per frame: '+$scope.pixels.length);
+			////console.log('Total pixels per frame: '+$scope.pixels.length);
 			//Activity based "sessions."
 			$scope.session();
 			
