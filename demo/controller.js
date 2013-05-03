@@ -133,7 +133,13 @@ function PixelPad($scope, $timeout, Frame){
 			console.log('Total pixels per frame: '+$scope.pixels.length);
 			//Activity based "sessions."
 			$scope.session();
-			//send the frame data // var frame = Frame.save({data:$scope.pixels}, updateCallback);
+			//send the frame data // 
+			var frame = Frame.update({
+				'source' : {
+					'name' : 'pixel_pulse', 
+					'colors': $scope.pixels}, updateCallback)
+				}
+			});
 			//Cache the data (history)
 			$scope.cache();
 			//Reset the frame;

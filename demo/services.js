@@ -3,9 +3,9 @@ var demo = angular.module('app', ['ngResource']);
 
 demo
 
-	.factory('Frame', function ($resource) {
-		return $resource( 'http://192.168.1.6/Layers/1/?source=:source&options=:options', 
-		{source: 'frame', options:'@options'}, 
+	.factory('ColumnPulse', function ($resource) {
+		return $resource( 'http://192.168.1.6/Layers/1/', 
+		{source:'@source'}, 
 		{update: {method:'PUT'}} )
 	})
 	
