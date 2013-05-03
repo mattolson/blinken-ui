@@ -125,7 +125,8 @@ function PixelPad($scope, $timeout, Frame){
 		
 		//This updates the server every so often.
 		var update = function() {
-	   cancelRefresh = $timeout(function update() {
+	   
+		cancelRefresh = $timeout(function update() {
 			//If running a cheat/hack (lioke the shake=sparkle hack) you can pause the timeline here.
 			if($scope.pause) return;			
 			console.log('refreshing');
@@ -133,13 +134,14 @@ function PixelPad($scope, $timeout, Frame){
 			console.log('Total pixels per frame: '+$scope.pixels.length);
 			//Activity based "sessions."
 			$scope.session();
-			//send the frame data // 
+			
 			var frame = Frame.update({
 				'source' : {
 					'name' : 'pixel_pulse', 
-					'colors': $scope.pixels}, updateCallback)
+					'colors': $scope.pixels
 				}
-			});
+			}, updateCallback);
+			
 			//Cache the data (history)
 			$scope.cache();
 			//Reset the frame;
