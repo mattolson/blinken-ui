@@ -128,10 +128,6 @@ function PixelPad($scope, $timeout, Frame, Layers){
 				var s = $scope.normalize(Math.round($scope.acc.y));
 				var l = $scope.lightness;
 				
-				//Sometimes NaN is not retruned, reducing this by at leasty 90% now (guess)
-				if(typeof h !== 'integer') h = Math.round($scope.acc.x);
-				if(typeof s !== 'integer') s = Math.round($scope.acc.y);
-				
 				return [h,s,l];
 			} else {
 				return [255,255,255];

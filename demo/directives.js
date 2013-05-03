@@ -14,9 +14,9 @@ demo
 		 		$(window).bind('acc', function(e) {
 					//console.log(e);
 			  	$scope.acc = {};
-					if(e.accX) $scope.acc.x = e.accX;
-					if(e.accY) $scope.acc.y = e.accY;
-					if(e.accZ) $scope.acc.z = e.accZ;
+					if(e.accX) $scope.acc.x = (typeof e.accX === "integer")  ? e.accX : $scope.acc.x;
+					if(e.accY) $scope.acc.y = (typeof e.accY === "integer")  ? e.accY : $scope.acc.y;
+					if(e.accZ) $scope.acc.z = (typeof e.accZ === "integer")  ? e.accZ : $scope.acc.z;
 				});
 			}
 		};
