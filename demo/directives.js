@@ -55,8 +55,8 @@ demo
 				
 			}
 		}
-	// 	
-	// })
+		
+	});
 	
 	// .directive('speed', function(){
 	// 	return {
