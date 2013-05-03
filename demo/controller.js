@@ -34,9 +34,9 @@ function PixelPad($scope, $timeout, Frame, Layers){
 		$scope.color_phase.steps = 255;
 		$scope.color_phase.step = 0;
 		
-		var layers = Layers.get({}, function(response){
-			console.log(response);
-		});
+		// var layers = Layers.get({}, function(response){
+		// 		console.log(response);
+		// 	});
 		
 		var updateCallback = function(){
 			////console.log('Node informed.');
@@ -51,7 +51,6 @@ function PixelPad($scope, $timeout, Frame, Layers){
 			var isPixels = $scope.isPixels();
 			if(!isPixels) $scope.idle++; //Increase the idle count
 			if($scope.active == false && isPixels) $scope.active = true; //Nobody has been using it, but surprise, there's pixel data... active is now true.
-
 		}
 		
 		$scope.isPixels = function(){
