@@ -38,7 +38,8 @@ function PixelPad($scope, $timeout, Frame, Layers){
 		// 		console.log(response);
 		// 	});
 		
-		var updateCallback = function(){
+		var updateCallback = function(response){
+			console.log('Node informed, it says '+response);
 			////console.log('Node informed.');
 		};
 		
