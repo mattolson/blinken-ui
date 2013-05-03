@@ -5,7 +5,7 @@ demo
 
 	.factory('Frame', function ($resource) {
 		return $resource( 
-			'http://192.168.1.6:8888/layers/:id', 
+			'http://192.168.1.6:port/layers/:id', 
 			{ id: 4, 'port' : 8888 },
 			{ 
 				update: { 
@@ -18,7 +18,7 @@ demo
 	
 	.factory('Layers', function($resource){
 		return $resource( 
-			'http://192.168.1.6:8888/layers/',
+			'http://192.168.1.6:port/layers/',
 			{'port' : 8888 }
 		);
 	})
