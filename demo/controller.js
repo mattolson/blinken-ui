@@ -26,6 +26,8 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		
 		$scope.period = 75;
 		
+		$scope.activity_level = 0;
+		
 		//Idle
 		$scope.idle = 0;
 		$scope.idleThreshold = 30;
@@ -34,7 +36,7 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		$scope.color_phase.steps = 255;
 		$scope.color_phase.step = 0;
 		
-		$scope.activity_level = 0;
+		
 		
 		// var layers = Layers.get({}, function(response){
 		// 		console.log(response);
@@ -119,6 +121,11 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			return res;
 		};
 		
+		$scope.scalePeriod = function(){
+			var scale = $scope.activity_level+1;
+			$scope.period = Math.floor(1000/scale);
+		}
+		
 		//Take acceleratomenter data and transform into HSV
 		$scope.motionToHSV = function(){
 			// console.log('h'+$scope.normalize(Math.round($scope.acc.x)))
@@ -162,6 +169,8 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		var update = function() {
 			
 		$scope.addFrame = function(){
+			
+			$scope.scalePeriod();
 			
 			$scope.response = $http.put(
 				'http://192.168.1.6:8888/layers/4/',
