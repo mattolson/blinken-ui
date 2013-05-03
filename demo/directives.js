@@ -3,8 +3,13 @@
 'use strict';
 
 demo
-	// .directive('timeline', function(){
-	// })
+	.directive('pixelpad', function(){
+		return {
+			link : function($scope){
+				
+			}
+		}
+	})
 
 	.directive('accData', function(){
 		'use strict';
@@ -85,7 +90,7 @@ demo
 	 * or any other of the "hm-event" listed underneath.
 	 */
 
-	angular.forEach('hmTap:tap hmDoubletap:doubletap hmHold:hold hmTransformstart:transformstart hmTransform:transform hmTransforend:transformend hmDragstart:dragstart hmDrag:drag hmDragend:dragend hmSwipe:swipe hmRelease:release'.split(' '), function(name) {
+	angular.forEach('hmTap:tap hmDoubletap:doubletap hmHold:hold hmTransformstart:transformstart hmTransform:transform hmTransforend:transformend hmDragstart:dragstart hmDrag:drag hmDragend:dragend hmDragup:dragup hmDragdown:dragdown hmDragleft:dragleft hmDragright:dragright hmSwipe:swipe hmRelease:release'.split(' '), function(name) {
 	  var directive = name.split(':');
 	  var directiveName = directive[0];
 	  var eventName = directive[1];
