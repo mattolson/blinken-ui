@@ -35,32 +35,27 @@
 	</section>
 	
 	<section id="right" class="controller">
-	
+		<!-- hm-tap="togglePixel(0)"
+		hm-hold="holdPixel(0)" -->
 		<div 
 			pixelpad
 			class="pixelpad" 
 			ng-mousedown="togglePixel(0)" 
-			hm-tap="togglePixel(0)"
-			hm-hold="holdPixel(0)"
-			style="background:hsl({{hsv[0]}},{{hsv[1]}}, {{hsv[2]}})">
+			style="background:hsl({{hsv[0]}},{{hsv[1]}},{{hsv[2]}})">
 			</div>
 			
 		<div 
 			pixelpad
 			class="pixelpad"
 			ng-mousedown="togglePixel(1)"
-			hm-tap="togglePixel(1)" 
-			hm-hold="holdPixel(1)"
-			style="background:hsl({{hsv[0]}},{{hsv[1]}}, {{hsv[2]}})">
+			style="background:hsl({{hsv[0]}},{{hsv[1]}},{{hsv[2]}})">
 				</div>
 				
 		<div 
 			pixelpad
 			class="pixelpad" 
 			ng-mousedown="togglePixel(2)" 
-			hm-tap="togglePixel(2)"	
-			hm-hold="holdPixel(2)"
-			style="background:hsl({{hsv[0]}},{{hsv[1]}}, {{hsv[2]}})">
+			style="background:hsl({{hsv[0]}},{{hsv[1]}},{{hsv[2]}})">
 				</div>
 		
 	</section>
