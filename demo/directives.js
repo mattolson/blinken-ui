@@ -46,12 +46,12 @@ demo
 									period : '30'
 								}
 							}
-						});
-					)
-					$timeout(function(){
-						$scope.pause = false;
-					}, 2000)
-				}
+						}
+					);
+					
+				$timeout(function(){
+					$scope.pause = false;
+				}, 2000)
 				
 			}
 		}
