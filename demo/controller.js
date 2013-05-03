@@ -24,7 +24,7 @@ function PixelPad($scope, $timeout, Frame, Layers){
 		// $scope.hsv = [];
 		$scope.acc = {};
 		
-		$scope.timeout = 250;
+		$scope.period = 250;
 		
 		//Idle
 		$scope.idle = 0;
@@ -173,7 +173,7 @@ function PixelPad($scope, $timeout, Frame, Layers){
 						name : 'pixel_pulse',
 						options : {
 							'colors': $scope.pixels,
-							'period' : $scope.timeout
+							'period' : $scope.period
 						}
 					};
 					frame.$update();
@@ -183,7 +183,7 @@ function PixelPad($scope, $timeout, Frame, Layers){
 					'name' : 'pixel_pulse', 
 					'options' : {	
 						'colors': $scope.pixels,
-						'period' : $scope.timeout
+						'period' : $scope.period
 					}
 				}
 			}), function(response, erp){
@@ -198,10 +198,10 @@ function PixelPad($scope, $timeout, Frame, Layers){
 			$scope.purge();
 			
 			//Infinite loop
-       cancelRefresh = $timeout(update, $scope.timeout);
+       cancelRefresh = $timeout(update, $scope.period);
 
 			//This beats interval, I'll explain why sometime.
-    	}, $scope.timeout);
+    	}, $scope.period);
 		};
 		
 		update();
