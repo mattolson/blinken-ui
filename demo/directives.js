@@ -15,7 +15,8 @@ demo
 	})
 
 	.directive('acc', function(){
-		//console.log('Binding accelerometer');
+		'use strict';
+		console.log('Binding accelerometer');
 		return {
 			link: function($scope) {
 		 		$(window).bind('acc', function(e) {
@@ -30,10 +31,10 @@ demo
 	})
 
 	.directive('shake', function(){
-		
+		'use strict';
 		return {
 			link: function($scope, Shake, $timeout){
-				//console.log('Binding shake.');
+				console.log('Binding shake.');
 				window.addEventListener('shake', shakeevent, false);
 
 				//function to call when shake occurs
