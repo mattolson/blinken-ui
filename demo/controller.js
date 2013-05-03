@@ -170,8 +170,6 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			
 		$scope.addFrame = function(){
 			
-			$scope.scalePeriod();
-			
 			$scope.response = $http.put(
 				'http://192.168.1.6:8888/layers/4/',
 				{
@@ -213,6 +211,8 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			//If running a cheat/hack (lioke the shake=sparkle hack) you can pause the timeline here.
 			if($scope.pause) return true;			
 			////console.log('refreshing');
+			
+			$scope.scalePeriod();
 			
 			//console.log('total frames in history: '+$scope.history.length)
 			
