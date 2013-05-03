@@ -174,7 +174,9 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			
 			$scope.$watch('response', function(status, response){
 				console.log(status+response);
-			})
+			});
+			
+			
 			// var frame = Frame.save({},{
 			// 				source : {
 			// 					name : 'pixel_pulse',

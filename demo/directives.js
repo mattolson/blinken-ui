@@ -26,25 +26,35 @@ demo
 		};
 		
 	})
-	// 
-	// .directive('shake', function(){
-	// 	'use strict';
-	// 	return {
-	// 		link: function($scope, Shake, $timeout){
-	// 			//console.log('Binding shake.');
-	// 			window.addEventListener('shake', shakeevent, false);
-	// 
-	// 			//function to call when shake occurs
-	// 			function shakeevent () {
-	// 				$scope.pause = true;
-	// 				Shake.update();
-	// 				$timeout(function(){
-	// 					$scope.pause = false;
-	// 				}, 2000)
-	// 			}
-	// 			
-	// 		}
-	// 	}
+	
+	.directive('shake', function(){
+		// 'use strict';
+		return {
+			link: function($scope, $http, Shake, $timeout){
+				//console.log('Binding shake.');
+				window.addEventListener('shake', shakeevent, false);
+	
+				//function to call when shake occurs
+				function shakeevent () {
+					$scope.pause = true;
+					var shake = $http.put(
+						'http://192.168.1.6:8888/layers/4/',
+						{
+							source : {
+								name : 'sparkle',
+								options : {
+									period : '30'
+								}
+							}
+						});
+					)
+					$timeout(function(){
+						$scope.pause = false;
+					}, 2000)
+				}
+				
+			}
+		}
 	// 	
 	// })
 	
