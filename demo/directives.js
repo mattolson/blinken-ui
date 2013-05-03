@@ -34,7 +34,6 @@ demo
 	
 				//console.log('Binding shake.');
 				window.addEventListener('shake', shakeevent, false);
-	
 				//function to call when shake occurs
 				function shakeevent () {
 					$scope.pause = true;
@@ -53,6 +52,7 @@ demo
 					$timeout(function(){
 						$scope.pause = false;
 					}, 2000)
+					
 				}
 			}
 		}
