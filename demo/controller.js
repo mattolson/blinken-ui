@@ -17,6 +17,7 @@ function PixelPad($scope, $timeout, Frame){
 		
 		$scope.pixels = [ null, null, null ];
 		$scope.history = [];
+		$scope.history_limit = 13;
 		
 		// $scope.hsv = [];
 		$scope.acc = {};
@@ -25,7 +26,7 @@ function PixelPad($scope, $timeout, Frame){
 		
 		//Idle
 		$scope.idle = 0;
-		$scope.idleThreshold = 10;
+		$scope.idleThreshold = 30;
 		
 		var updateCallback = function(){
 			//console.log('Node informed.');
@@ -56,7 +57,7 @@ function PixelPad($scope, $timeout, Frame){
 			
 			$scope.history.unshift(frame);
 			
-			if($scope.history.length >= 100) $scope.history.pop();
+			if($scope.history.length > $scope.history_limit) $scope.history.pop();
 		};
 		
 		$scope.purge = function(){
@@ -130,6 +131,8 @@ function PixelPad($scope, $timeout, Frame){
 			//If running a cheat/hack (lioke the shake=sparkle hack) you can pause the timeline here.
 			if($scope.pause) return;			
 			//console.log('refreshing');
+			
+			console.log('total frames in history: '+$scope.history.length)
 			
 			//console.log('Total pixels per frame: '+$scope.pixels.length);
 			//Activity based "sessions."
