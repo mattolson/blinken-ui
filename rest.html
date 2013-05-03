@@ -1,0 +1,61 @@
+<!doctype html>
+<html ng-app="blink">
+<head>
+  <meta charset="utf-8" />
+  <title>Testing Angular REST</title>
+  <script type="text/javascript" src="lib/angular.min.js"></script>
+  <script type="text/javascript" src="lib/angular-resource.min.js"></script>
+  <script type="text/javascript">
+
+    var blink = angular.module("blink", ["ngResource"]);
+    blink.run(function( $resource ) {
+      // Source resource
+      var Source = $resource('http://leds.dev\\:8888/sources/:source_id',
+        { 'source_id': '@id' },
+        { 'update': {method: 'PUT'} }
+      );
+
+      // Layer resource
+      var Layer = $resource('http://leds.dev\\:8888/layers/:layer_id',
+        { 'layer_id': '@id' },
+        { 'update': {method: 'PUT'} }
+      );
+
+      // GET /sources
+      var sources = Source.query(function() {
+        console.log("sources = " + sources);
+      });
+
+      // GET /layers
+      var layers = Layer.query(function() {
+        console.log("layers = " + layers);
+      });
+
+      // POST /layers
+      var layer0 = new Layer();
+      layer0.source = {
+        name: 'static',
+        options: {
+          color: [255,0,0]
+        }
+      };
+      layer0.$save();
+
+      // PUT /layers/:id
+      var randomizer = setInterval(function() {
+        // Change to random color every two seconds
+        layer0.source.options.color = [Math.floor(Math.random()*255.0), Math.floor(Math.random()*255.0), Math.floor(Math.random()*255.0)]; 
+        layer0.$update();
+      }, 2000);
+
+      // DELETE /layers/:id
+      setTimeout(function() {
+        clearInterval(randomizer);
+        layer0.$remove();
+      }, 10000);
+    });
+  </script>
+</head>
+<body>
+</body>
+</html>
