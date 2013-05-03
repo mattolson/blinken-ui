@@ -14,7 +14,9 @@
 <body ng-controller="PixelPad" acc shake>
 	
 	<section id="left" class="controller">
-			
+			{{$scope.acc.x}}<br/>
+			{{$scope.acc.y}}<br/>
+			{{$scope.acc.z}}
 	</section>
 	
 	<section id="center" class="timeline">
@@ -37,9 +39,6 @@
 			ng-mousedown="togglePixel(0)" 
 			hm-tap="togglePixel(0)"
 			style="background:hsl({pixels[1][0]},{pixels[1][1]}, {pixels[1][2]})">
-			{{$scope.acc.x}}<br/>
-			{{$scope.acc.y}}<br/>
-			{{$scope.acc.z}}
 			</div>
 		<div 
 			class="pixelpad"
