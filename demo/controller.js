@@ -176,7 +176,7 @@ function PixelPad($scope, $timeout, Frame, Layers){
 							'period' : $scope.timeout
 						}
 					};
-					frame.update();
+					frame.$update();
 					
 			var frame = Frame.update(JSON.stringify({
 				'source' : {
