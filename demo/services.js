@@ -7,7 +7,12 @@ demo
 		return $resource( 
 			'http://192.168.1.6:8888/layers/:id', 
 			{ id: 4, 'port' : 8888 },
-			{ update: { method:'PUT' } } 
+			{ 
+				update: { 
+					method:'PUT',
+					headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}  
+				}
+			}
 		);
 	})
 	
