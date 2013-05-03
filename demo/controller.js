@@ -237,6 +237,9 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
        cancelRefresh = $timeout(update, $scope.period);
 
 			$scope.hsv = $scope.motionToHSV();
+			
+			console.log(hsv);
+			console.log($scope.activity_level);
 
 			//This beats interval, I'll explain why sometime.
     	}, $scope.period);
