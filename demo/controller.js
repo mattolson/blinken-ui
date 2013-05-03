@@ -21,11 +21,11 @@ function PixelPad($scope, $timeout, Frame){
 		// $scope.hsv = [];
 		$scope.acc = {};
 		
-		$scope.timeout = 100;
+		$scope.timeout = 250;
 		
 		//Idle
 		$scope.idle = 0;
-		$scope.idleThreshold = 30;
+		$scope.idleThreshold = 10;
 		
 		var updateCallback = function(){
 			//console.log('Node informed.');
