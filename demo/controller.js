@@ -34,6 +34,8 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		$scope.color_phase.steps = 255;
 		$scope.color_phase.step = 0;
 		
+		$scope.activity_level = 0;
+		
 		// var layers = Layers.get({}, function(response){
 		// 		console.log(response);
 		// 	});
@@ -82,9 +84,10 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		//method to turn activate and deactive an active pixel.
 		$scope.togglePixel = function(key){
 			var state = false;
+			
+			$scope.activity_level++;
 			// var state = $scope.pixels[key] !== null;
 			////console.log('toggle pixel '+key+'. Present state: '+state);
-		
 			// console.log('hsv '+$scope.motionToHSV() );	
 			//If on, turn off ; if off, turn on.
 			$scope.pixels[key] = (state) ? null : $scope.hsv;
@@ -222,6 +225,7 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			// console.log(frame);
 			
 			if($scope.isPixels()) $scope.addFrame();
+			else $scope.activity_level = ($scope.activity_level > 0) ? $scope.activity_level-1 : 0;
 			
 			//Cache the data (history)
 			$scope.cache();
