@@ -49,13 +49,12 @@ demo
 						}
 					);
 					
-				$timeout(function(){
-					$scope.pause = false;
-				}, 2000)
-				
+					$timeout(function(){
+						$scope.pause = false;
+					}, 2000)
+				}
 			}
 		}
-		
 	});
 	
 	// .directive('speed', function(){
