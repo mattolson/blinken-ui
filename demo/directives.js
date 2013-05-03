@@ -13,10 +13,10 @@ demo
 			link: function($scope) {
 		 		$(window).bind('acc', function(e) {
 					//console.log(e);
-			  	$scope.acc = {};
-					if(e.accX) $scope.acc.x = (typeof e.accX === "integer")  ? e.accX : $scope.acc.x;
-					if(e.accY) $scope.acc.y = (typeof e.accY === "integer")  ? e.accY : $scope.acc.y;
-					if(e.accZ) $scope.acc.z = (typeof e.accZ === "integer")  ? e.accZ : $scope.acc.z;
+			  	$scope.acc = $scope.acc ? $scope.acc : { x : 0, y : 0, z : 0 };
+					if(e.accX) $scope.acc.x = (typeof Math.round(e.accX) === "integer")  ? Math.round(e.accX) : $scope.acc.x;
+					if(e.accY) $scope.acc.y = (typeof Math.round(e.accY) === "integer")  ? Math.round(e.accY) : $scope.acc.y;
+					if(e.accZ) $scope.acc.z = (typeof Math.round(e.accZ) === "integer")  ? Math.round(e.accZ) : $scope.acc.z;
 				});
 			}
 		};
