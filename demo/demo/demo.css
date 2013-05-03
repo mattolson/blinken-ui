@@ -1,0 +1,30 @@
+body {height:100%;}
+/*Layout*/
+#right, #left { position:absolute;top:0px;bottom:0px;width:10%; height:100%; }
+#left {left:0px}
+#right {right:0px;}
+#center { position:absolute;top:0px;right:0px;bottom:0px;left:0px;width:100%; height:100%; padding:0 10% 0 0; overflow:hidden; background:#333;}
+
+/*The timeline styling*/
+#history {text-align:right;position:absolute;right:0px;top:0px;bottom:0px;}
+.frame {width:100px;height:100%;padding:0;margin:0;display:inline-block; border-right:1px dotted #555;float:right;}
+
+
+
+.pixel, .pixelpad {display:block;width:100%;height:33%;background:#000;}
+
+.pixel {border-bottom:1px dotted #555;color:#fff;}
+
+.pixelpad {background-image:url('./images/crosshatch.png');background-color:#555; border-bottom:1px solid #999}
+
+.pixelpad:active {background:yellow;}
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
