@@ -25,7 +25,7 @@ demo
 	.factory('Layers', function($resource){
 		return $resource( 
 			'http://192.168.1.6:port/layers/',
-			{'port' : PORT }
+			{ 'port' : PORT }
 		);
 	})
 	

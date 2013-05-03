@@ -89,6 +89,8 @@ function PixelPad($scope, $timeout, Frame, Layers){
 			//If on, turn off ; if off, turn on.
 			$scope.pixels[key] = (state) ? null :  $scope.motionToHSV() ;
 			
+			$scope.save();
+			
 			//console.log('RGB' + $scope.hsvToRGB( $scope.motionToHSV() ) );
 			// $scope.pixels[key] = (state) ? null : [255,255,255];
 			
@@ -156,6 +158,21 @@ function PixelPad($scope, $timeout, Frame, Layers){
 		// 	
 		//This updates the server every so often.
 		var update = function() {
+			
+		$scope.save = function(){
+			var frame = Frame.update({
+				'source' : {
+					'name' : 'pixel_pulse',
+					'options' : {
+						'colors': $scope.pixels,
+						'period' : $scope.period
+					}
+				}
+			}, function(response, erp){
+					console.log('Node informed, it says '+response + ' AND '+erp);
+					////console.log('Node informed.');
+			});
+		}
 	   
 		cancelRefresh = $timeout(function update() {
 			//If running a cheat/hack (lioke the shake=sparkle hack) you can pause the timeline here.
@@ -177,20 +194,8 @@ function PixelPad($scope, $timeout, Frame, Layers){
 			// 			}
 			// 		};
 			// 		frame.$update();
-					
-			var frame = Frame.update({
-				'source' : {
-					'name' : 'pixel_pulse',
-					'options' : {
-						'colors': $scope.pixels,
-						'period' : $scope.period
-					}
-				}
-			}, function(response, erp){
-					console.log('Node informed, it says '+response + ' AND '+erp);
-					////console.log('Node informed.');
-			});
 			
+			//
 			console.log(frame);
 			
 			//Cache the data (history)
