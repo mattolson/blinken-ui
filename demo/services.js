@@ -15,7 +15,7 @@ demo
 		return $resource( 
 			'http://192.168.1.6:8888/layers/'
 		);
-	});
+	})
 	
 	.factory('Shake', function($resource){
 		return $resource( 'http://192.163.1.6/layers/2/', 
