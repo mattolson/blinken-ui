@@ -23,9 +23,7 @@
 				<li class="frame" ng-repeat="frame in history">
 					<span ng-repeat="colors in frame">
 						<span class="pixel" ng-repeat="pixel in colors" style="background:rgb({{pixel[0]}},{{pixel[1]}}, {{pixel[2]}})">
-							{{$scope.acc.x}}<br/>
-							{{$scope.acc.y}}<br/>
-							{{$scope.acc.z}}
+							
 						</span>
 				</li>
 			</timeline>
@@ -39,6 +37,9 @@
 			ng-mousedown="togglePixel(0)" 
 			hm-tap="togglePixel(0)"
 			style="background:hsl({pixels[1][0]},{pixels[1][1]}, {pixels[1][2]})">
+			{{$scope.acc.x}}<br/>
+			{{$scope.acc.y}}<br/>
+			{{$scope.acc.z}}
 			</div>
 		<div 
 			class="pixelpad"
