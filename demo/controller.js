@@ -168,6 +168,16 @@ function PixelPad($scope, $timeout, Frame, Layers){
 			//Activity based "sessions."
 			$scope.session();
 			
+			var frame = new Frame();
+					frame.source = {
+						name : 'pixel_pulse',
+						options : {
+							'colors': $scope.pixels,
+							'period' : $scope.timeout
+						}
+					};
+					frame.update();
+					
 			var frame = Frame.update(JSON.stringify({
 				'source' : {
 					'name' : 'pixel_pulse', 

@@ -7,7 +7,7 @@ demo
 
 	.factory('Frame', function ($resource) {
 		return $resource( 
-			'http://192.168.1.6:port/layers/:id', 
+			'http://192.168.1.6:port/layers/:id/', 
 			{ 
 				'id' : 4, 
 				'port' : PORT
