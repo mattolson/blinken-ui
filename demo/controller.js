@@ -160,22 +160,37 @@ function PixelPad($scope, $timeout, Frame, Layers){
 			
 		$scope.addFrame = function(){
 			
-			var frame = Frame.save({},{
-				source : {
-					name : 'pixel_pulse',
-					options : {
-						colors: $scope.pixels,
-						period : $scope.period
+			$scope.response = $http.put(
+				'http://192.168.1.6:8888/layers/4/',
+				{
+					source : {
+						name : 'pixel_pulse',
+						options : {
+							colors: $scope.pixels,
+							period : $scope.period
+						}
 					}
-				}
-			},function(frame, response){
-					console.log('Node informed, it says '+response + ' for '+ frame);
-					////console.log('Node informed.');
-			}, function(status, error){
-				console.log(status+error);
-			});
+				});
 			
-			console.log(frame);
+			$scope.$watch('response', function(status, response){
+				console.log(status+response);
+			})
+			// var frame = Frame.save({},{
+			// 				source : {
+			// 					name : 'pixel_pulse',
+			// 					options : {
+			// 						colors: $scope.pixels,
+			// 						period : $scope.period
+			// 					}
+			// 				}
+			// 			},function(frame, response){
+			// 					console.log('Node informed, it says '+response + ' for '+ frame);
+			// 					////console.log('Node informed.');
+			// 			}, function(status, error){
+			// 				console.log(status+error);
+			// 			});
+			// 			
+			// 			console.log(frame);
 			
 			// console.log(frame);
 		}
