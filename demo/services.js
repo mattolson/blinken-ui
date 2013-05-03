@@ -10,7 +10,7 @@ demo
 			'http://192.168.1.6:port/layers/:id/', 
 			{ 
 				'id' : 4, 
-				'port' : PORT
+				'port' : PORT,
 				'source' : '@source'
 			},
 			{ 
