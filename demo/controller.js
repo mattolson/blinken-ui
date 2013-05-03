@@ -238,7 +238,7 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 
 			$scope.hsv = $scope.motionToHSV();
 			
-			console.log(hsv);
+			console.log($scope.hsv);
 			console.log($scope.activity_level);
 
 			//This beats interval, I'll explain why sometime.
