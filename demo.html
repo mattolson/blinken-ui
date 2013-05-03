@@ -10,7 +10,7 @@
 	<![endif]-->
 	
 </head>
-<body ng-controller="PixelPad" acc>
+<body ng-controller="PixelPad" acc shake>
 	
 	<section id="left" class="controller">
 			
@@ -33,19 +33,19 @@
 		<div 
 		class="pixelpad" 
 		ng-mousedown="togglePixel(0)" 
-		te-touchstart="togglePixel(0)"
+		hm-tap="togglePixel(0)"
 		style="background:hsl({pixels[1][0]},{pixels[1][1]}, {pixels[1][2]})">
 			</div>
 		<div 
 			class="pixelpad"
 			ng-mousedown="togglePixel(1)"
-			te-touchstart="togglePixel(1)" 
+			hm-tap="togglePixel(1)" 
 			style="background:hsl({pixels[2][0]},{pixels[2][1]}, {pixels[2][2]})">
 				</div>
 		<div 
 			class="pixelpad" 
 			ng-mousedown="togglePixel(2)" 
-			te-touchstart="togglePixel(2)"	
+			hm-tap="togglePixel(2)"	
 			style="background:hsl({pixels[3][0]},{pixels[3][1]}, {pixels[3][2]})">
 				</div>
 		
@@ -57,10 +57,14 @@
 	<script type="text/javascript" src="./lib/jquery-ui/plugins/jquery-ui.touch-punch.js" type="text/javascript"></script>
 	<script type="text/javascript" src="./lib/jquery/plugins/jquery.accelerometer.js" type="text/javascript"></script>
 	
+	<!-- Hammer JS for multi-touch events -->
+	<script src="./lib/hammer.js"></script>
+	<script src="./lib/jquery/plugins/jquery.hammer.js"></script>
+	
 	<!-- Angular -->
   <script src="./lib/angular.min.js"></script>
+ 	<script src="./lib/angular-hammer.js"></script>
   <script src="./lib/angular-resource.min.js"></script>
-  <script src="./lib/angular-touchevents.js"></script>
 
 	<!-- Components -->
   <script src="./demo/controller.js"></script>
