@@ -172,6 +172,8 @@ function PixelPad($scope, $timeout, Frame, Layers){
 					console.log('Node informed, it says '+response + ' AND '+erp);
 					////console.log('Node informed.');
 			});
+			
+			console.log(frame);
 		}
 	   
 		cancelRefresh = $timeout(function update() {
@@ -196,7 +198,7 @@ function PixelPad($scope, $timeout, Frame, Layers){
 			// 		frame.$update();
 			
 			//
-			console.log(frame);
+			// console.log(frame);
 			
 			//Cache the data (history)
 			$scope.cache();
