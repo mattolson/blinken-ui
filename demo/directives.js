@@ -14,9 +14,13 @@ demo
 		 		$(window).bind('acc', function(e) {
 					//console.log(e);
 			
-					if(e.accX) $scope.acc.x = (typeof e.accX === "float")  ? e.accX : $scope.acc.x;
-					if(e.accY) $scope.acc.y = (typeof e.accY === "float")  ? e.accY : $scope.acc.y;
-					if(e.accZ) $scope.acc.z = (typeof e.accZ === "float")  ? e.accZ : $scope.acc.z;
+					// $scope.acc.x = (typeof e.accX === "float")  ? e.accX : $scope.acc.x;
+					// 			$scope.acc.y = (typeof e.accY === "float")  ? e.accY : $scope.acc.y;
+					// 			$scope.acc.z = (typeof e.accZ === "float")  ? e.accZ : $scope.acc.z;
+					
+					$scope.acc.x = e.accX;
+					$scope.acc.y = e.accY;
+					$scope.acc.z = e.accZ;
 				});
 			}
 		};
