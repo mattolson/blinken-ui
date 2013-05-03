@@ -19,7 +19,7 @@ function PixelPad($scope, $timeout, Frame){
 		$scope.history = [];
 		
 		// $scope.hsv = [];
-		$scope.acc = [];
+		$scope.acc = {};
 		
 		$scope.timeout = 100;
 		
