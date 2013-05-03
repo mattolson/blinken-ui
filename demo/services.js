@@ -15,7 +15,7 @@ demo
 			{ 
 				update: { 
 					method:'PUT',
-					headers: {'Content-Type':'form-data'}  
+					headers: {'Content-Type':'form-data; charset=UTF-8'}  
 				}
 			}
 		);
