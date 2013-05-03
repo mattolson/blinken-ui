@@ -5,7 +5,7 @@ var WHITE = [255,255,255];
 
 demo = angular.module('app', ['ngResource']);
 
-function PixelPad($scope, $timeout, Frame, Layers){
+function PixelPad($scope, $timeout, $http, Frame, Layers){
 	
 		$scope.lightness = 200;
 		
