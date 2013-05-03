@@ -89,8 +89,6 @@ function PixelPad($scope, $timeout, Frame, Layers){
 			//If on, turn off ; if off, turn on.
 			$scope.pixels[key] = (state) ? null :  $scope.motionToHSV() ;
 			
-			$scope.save();
-			
 			//console.log('RGB' + $scope.hsvToRGB( $scope.motionToHSV() ) );
 			// $scope.pixels[key] = (state) ? null : [255,255,255];
 			
@@ -161,7 +159,7 @@ function PixelPad($scope, $timeout, Frame, Layers){
 		var update = function() {
 			
 		$scope.save = function(){
-			var frame = Frame.update({
+			var frame = Frame.save({
 				source : {
 					name : 'pixel_pulse',
 					options : {
@@ -175,6 +173,8 @@ function PixelPad($scope, $timeout, Frame, Layers){
 			});
 			
 			console.log(frame);
+			
+			// console.log(frame);
 		}
 	   
 		cancelRefresh = $timeout(function update() {
@@ -200,6 +200,8 @@ function PixelPad($scope, $timeout, Frame, Layers){
 			
 			//
 			// console.log(frame);
+			
+			if($scope.isPixels()) $scope.save();
 			
 			//Cache the data (history)
 			$scope.cache();
