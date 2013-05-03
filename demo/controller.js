@@ -160,7 +160,7 @@ function PixelPad($scope, $timeout, Frame, Layers){
 			
 		$scope.addFrame = function(){
 			
-			var frame = Frame.update({},{
+			var frame = Frame.save({},{
 				source : {
 					name : 'pixel_pulse',
 					options : {
@@ -168,7 +168,7 @@ function PixelPad($scope, $timeout, Frame, Layers){
 						period : $scope.period
 					}
 				}
-			}, function(frame, response){
+			},function(frame, response){
 					console.log('Node informed, it says '+response + ' for '+ frame);
 					////console.log('Node informed.');
 			}, function(status, error){
