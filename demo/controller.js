@@ -7,7 +7,7 @@ demo = angular.module('app', ['ngResource']);
 
 function PixelPad($scope, $timeout, Frame){
 	
-		$scope.lightness = 20;
+		$scope.lightness = 200;
 		
 		////console.log('Controller: PixelPad');
 		
@@ -29,6 +29,10 @@ function PixelPad($scope, $timeout, Frame){
 		//Idle
 		$scope.idle = 0;
 		$scope.idleThreshold = 30;
+		
+		$scope.color_phase = {};
+		$scope.color_phase.steps = 255;
+		$scope.color_phase.step = 0;
 		
 		var updateCallback = function(){
 			////console.log('Node informed.');
@@ -68,8 +72,11 @@ function PixelPad($scope, $timeout, Frame){
 		
 		//If the number of idle frames is less than the idea_threshold than someone is using the controller.
 		$scope.resetSession = function(){
-			if($scope.idle < $scope.idleThreshold) return ($scope.active=true);
-			return ($scope.active=true)
+			if($scope.idle < $scope.idleThreshold) {
+				$scope.active=true;
+			} else {
+				
+			}
 		};
 		
 		//method to turn activate and deactive an active pixel.
@@ -89,10 +96,24 @@ function PixelPad($scope, $timeout, Frame){
 		
 		};
 		
+		$scope.colorPhasing - function(step){
+			var newhue = $scope.colorPhase.hue + (1 * step);
+			if(newhue > $scope.color_phase.steps) newhue = 0;
+			$scope.colorPhase.hue = newhue;
+			$scope.color_phase.step++;
+			return (newhue) ? step : 0;
+		}
+		
+		$scope.cap_integer = function(value, max) {
+			return (value < max) ? value : max;
+		}
+		
 		//Normalizes accelerometer values between 0 & 255
 		$scope.normalize = function(x){
-			console.log( Math.round( 1 + (x-(-85)) * (255-1) / ((275)-(-85)) ) );
-			return Math.round( 1 + (x-(-85)) * (255-1) / ((275)-(-85)) );
+			var res = Math.round( 1 + (x-(-50)) * (255-0) / ((100)-(-50)) );
+			// var res = x*20;
+			console.log( res );
+			return res;
 		};
 		
 		//Take acceleratomenter data and transform into HSV
@@ -101,10 +122,10 @@ function PixelPad($scope, $timeout, Frame){
 			console.log('s'+$scope.normalize(Math.round($scope.acc.y)))
 
 			if($scope.acc) {
-				var a = $scope.normalize(Math.round($scope.acc.x));
-				var b = $scope.normalize(Math.round($scope.acc.y));
-				var c = $scope.lightness;
-				return [a,b,c];
+				var h = $scope.normalize(Math.round($scope.acc.x));
+				var s = $scope.normalize(Math.round($scope.acc.y));
+				var l = $scope.lightness;
+				return [h,s,l];
 			} else {
 				return [255,255,255];
 			}
