@@ -38,10 +38,6 @@ function PixelPad($scope, $timeout, Frame, Layers){
 		// 		console.log(response);
 		// 	});
 		
-		var updateCallback = function(response){
-			console.log('Node informed, it says '+response);
-			////console.log('Node informed.');
-		};
 		
 		//Cancels timeout in case views disrupts us, fail safe
 		$scope.$on('$destroy', function(e) {
@@ -163,7 +159,7 @@ function PixelPad($scope, $timeout, Frame, Layers){
 	   
 		cancelRefresh = $timeout(function update() {
 			//If running a cheat/hack (lioke the shake=sparkle hack) you can pause the timeline here.
-			if($scope.pause) return;			
+			if($scope.pause) return true;			
 			////console.log('refreshing');
 			
 			//console.log('total frames in history: '+$scope.history.length)
@@ -180,14 +176,21 @@ function PixelPad($scope, $timeout, Frame, Layers){
 						'period' : $scope.timeout
 					}
 				}
-			}), updateCallback);
+			}), function(response, erp){
+					console.log('Node informed, it says '+response + ' AND '+erp);
+					////console.log('Node informed.');
+			});
 			
 			//Cache the data (history)
 			$scope.cache();
+			
 			//Reset the frame;
 			$scope.purge();
+			
 			//Infinite loop
        cancelRefresh = $timeout(update, $scope.timeout);
+
+			//This beats interval, I'll explain why sometime.
     	}, $scope.timeout);
 		};
 		
