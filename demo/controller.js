@@ -21,7 +21,7 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		$scope.history = [];
 		$scope.history_limit = 13;
 		
-		// $scope.hsv = [];
+		$scope.hsv = {};
 		$scope.acc = { x : 0, y : 0, z : 0 };
 		
 		$scope.period = 75;
@@ -87,7 +87,7 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		
 			// console.log('hsv '+$scope.motionToHSV() );	
 			//If on, turn off ; if off, turn on.
-			$scope.pixels[key] = (state) ? null :  $scope.motionToHSV() ;
+			$scope.pixels[key] = (state) ? null : $scope.hsv;
 			
 			//console.log('RGB' + $scope.hsvToRGB( $scope.motionToHSV() ) );
 			// $scope.pixels[key] = (state) ? null : [255,255,255];
@@ -231,6 +231,8 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			
 			//Infinite loop
        cancelRefresh = $timeout(update, $scope.period);
+
+			$scope.hsv = $scope.motionToHSV();
 
 			//This beats interval, I'll explain why sometime.
     	}, $scope.period);
