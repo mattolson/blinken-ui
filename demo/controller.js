@@ -5,7 +5,7 @@ var WHITE = [255,255,255];
 
 demo = angular.module('app', ['ngResource']);
 
-function PixelPad($scope, $timeout, Frame){
+function PixelPad($scope, $timeout, Frame, Layers){
 	
 		$scope.lightness = 200;
 		
@@ -33,6 +33,10 @@ function PixelPad($scope, $timeout, Frame){
 		$scope.color_phase = {};
 		$scope.color_phase.steps = 255;
 		$scope.color_phase.step = 0;
+		
+		var layers = Layers.get({}, function(response){
+			console.log(response);
+		});
 		
 		var updateCallback = function(){
 			////console.log('Node informed.');
