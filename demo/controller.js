@@ -40,6 +40,7 @@ function PixelPad($scope, $timeout, Frame){
 			var isPixels = $scope.isPixels();
 			if(!isPixels) $scope.idle++; //Increase the idle count
 			if($scope.active == false && isPixels) $scope.active = true; //Nobody has been using it, but surprise, there's pixel data... active is now true.
+
 		}
 		
 		$scope.isPixels = function(){
