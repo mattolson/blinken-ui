@@ -169,7 +169,7 @@ function PixelPad($scope, $timeout, Frame, Layers){
 						period : $scope.period
 					}
 				}
-			})), function(frame, response){
+			}), function(frame, response){
 					console.log('Node informed, it says '+response + ' for '+ frame);
 					////console.log('Node informed.');
 			});
