@@ -85,7 +85,7 @@ function PixelPad($scope, $timeout, Frame, Layers){
 			// var state = $scope.pixels[key] !== null;
 			////console.log('toggle pixel '+key+'. Present state: '+state);
 		
-			console.log('hsv '+$scope.motionToHSV() );	
+			// console.log('hsv '+$scope.motionToHSV() );	
 			//If on, turn off ; if off, turn on.
 			$scope.pixels[key] = (state) ? null :  $scope.motionToHSV() ;
 			
