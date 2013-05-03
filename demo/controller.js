@@ -3,13 +3,15 @@ var WHITE = [255,255,255];
 	
 //It's 12:00am
 'use strict';
-var demo = angular.module('app', []);
+var demo = angular.module('app', ['ngResource']);
 
 function PixelPad($scope, $timeout, Frame){
 		
 		console.log('Controller: PixelPad');
 		
 		$scope.defaults = [255,255,255];
+		
+		$scope.pause = false;
 		
 		$scope.active = false;
 		
@@ -108,24 +110,12 @@ function PixelPad($scope, $timeout, Frame){
 		    i = Math.floor(h);
 		    data = [v*(1-s), v*(1-s*(h-i)), v*(1-s*(1-(h-i)))];
 		    switch(i) {
-		      case 0:
-		        return [v, data[2], data[0]];
-		        break;
-		      case 1:
-		        return [data[1], v, data[0]];
-		        break;
-		      case 2:
-		        return [data[0], v, data[2]];
-		        break;
-		      case 3:
-		        return [data[0], data[1], v];
-		        break;
-		      case 4:
-		        return [data[2], data[0], v];
-		        break;
-		      default:
-		        return [v, data[0], data[1]];
-		        break;
+		      case 0: return [v, data[2], data[0]];
+		      case 1: return [data[1], v, data[0]];
+		      case 2: return [data[0], v, data[2]];
+		      case 3: return [data[0], data[1], v];
+		      case 4: return [data[2], data[0], v];
+		      default: return [v, data[0], data[1]];
 		    }
 		  }
 		  // return '#' + rgb.map(function(x){ 
@@ -136,12 +126,14 @@ function PixelPad($scope, $timeout, Frame){
 		//This updates the server every so often.
 		var update = function() {
 	   cancelRefresh = $timeout(function update() {
+			//If running a cheat/hack (lioke the shake=sparkle hack) you can pause the timeline here.
+			if($scope.pause) return;			
 			console.log('refreshing');
+			
 			console.log('Total pixels per frame: '+$scope.pixels.length);
 			//Activity based "sessions."
 			$scope.session();
-			//send the frame data
-			// var frame = Frame.save({data:$scope.pixels}, updateCallback);
+			//send the frame data // var frame = Frame.save({data:$scope.pixels}, updateCallback);
 			//Cache the data (history)
 			$scope.cache();
 			//Reset the frame;
