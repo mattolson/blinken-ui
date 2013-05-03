@@ -112,14 +112,14 @@ function PixelPad($scope, $timeout, Frame, Layers){
 		$scope.normalize = function(x){
 			var res = Math.round( 1 + (x-(-50)) * (255-0) / ((100)-(-50)) );
 			// var res = x*20;
-			console.log( res );
+			// console.log( res );
 			return res;
 		};
 		
 		//Take acceleratomenter data and transform into HSV
 		$scope.motionToHSV = function(){
-			console.log('h'+$scope.normalize(Math.round($scope.acc.x)))
-			console.log('s'+$scope.normalize(Math.round($scope.acc.y)))
+			// console.log('h'+$scope.normalize(Math.round($scope.acc.x)))
+			// console.log('s'+$scope.normalize(Math.round($scope.acc.y)))
 
 			if($scope.acc) {
 				var h = $scope.normalize(Math.round($scope.acc.x));
@@ -168,25 +168,25 @@ function PixelPad($scope, $timeout, Frame, Layers){
 			//Activity based "sessions."
 			$scope.session();
 			
-			var frame = new Frame();
-					frame.source = {
-						name : 'pixel_pulse',
-						options : {
-							'colors': $scope.pixels,
-							'period' : $scope.period
-						}
-					};
-					frame.$update();
+			// var frame = new Frame();
+			// 		frame.source = {
+			// 			name : 'pixel_pulse',
+			// 			options : {
+			// 				'colors': $scope.pixels,
+			// 				'period' : $scope.period
+			// 			}
+			// 		};
+			// 		frame.$update();
 					
-			var frame = Frame.update(JSON.stringify({
+			var frame = Frame.update({
 				'source' : {
-					'name' : 'pixel_pulse', 
-					'options' : {	
+					'name' : 'pixel_pulse',
+					'options' : {
 						'colors': $scope.pixels,
 						'period' : $scope.period
 					}
 				}
-			}), function(response, erp){
+			}, function(response, erp){
 					console.log('Node informed, it says '+response + ' AND '+erp);
 					////console.log('Node informed.');
 			});
