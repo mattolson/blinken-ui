@@ -191,6 +191,8 @@ function PixelPad($scope, $timeout, Frame, Layers){
 					////console.log('Node informed.');
 			});
 			
+			console.log(frame);
+			
 			//Cache the data (history)
 			$scope.cache();
 			
