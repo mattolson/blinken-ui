@@ -13,18 +13,19 @@ demo
 	
 	.factory('Layers', function($resource){
 		return $resource( 
-			'http://192.168.1.6:8888/layers/'
+			'http://192.168.1.6:8888/layers/',
+			{'8888' : 8888}
 		);
 	})
 	
 	.factory('Shake', function($resource){
-		return $resource( 'http://192.163.1.6/layers/2/', 
-			{ source: 'sparkle' }, 
+		return $resource( 'http://192.163.1.6:8888/layers/2/', 
+			{ source: 'sparkle', '8888' : 8888 }, 
 			{ update : { method : 'PUT'} } 
 		)
-	})
-	
-	.factory('Members', function($resource){
-		return $resource( 'http://ideafablabs.com/api/members/total', 
-		{ get : { method : 'JSONP'} } )
 	});
+	
+	// .factory('Members', function($resource){
+	// 	return $resource( 'http://ideafablabs.com/api/members/total', 
+	// 	{ get : { method : 'JSONP'} } )
+	// });
