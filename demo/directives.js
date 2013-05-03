@@ -14,9 +14,9 @@ demo
 		 		$(window).bind('acc', function(e) {
 					//console.log(e);
 			
-					if(e.accX) $scope.acc.x = (typeof Math.round(e.accX) === "integer")  ? Math.round(e.accX) : $scope.acc.x;
-					if(e.accY) $scope.acc.y = (typeof Math.round(e.accY) === "integer")  ? Math.round(e.accY) : $scope.acc.y;
-					if(e.accZ) $scope.acc.z = (typeof Math.round(e.accZ) === "integer")  ? Math.round(e.accZ) : $scope.acc.z;
+					if(e.accX) $scope.acc.x = (typeof e.accX === "float")  ? Math.round(e.accX*10)/10 : $scope.acc.x;
+					if(e.accY) $scope.acc.y = (typeof e.accY === "float")  ? Math.round(e.accY*10)/10 : $scope.acc.y;
+					if(e.accZ) $scope.acc.z = (typeof e.accZ === "float")  ? Math.round(e.accZ*10)/10 : $scope.acc.z;
 				});
 			}
 		};
