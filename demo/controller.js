@@ -9,8 +9,7 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 	
 		// $scope.lightness = 0.5;
 		$scope.lightness = 150;
-		
-		//console.log('Controller: PixelPad');
+	
 		
 		$scope.defaults = [255,255,255];
 		
@@ -40,7 +39,7 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		$scope.color_phase.step = 0;
 		
 		// var layers = Layers.get({}, function(response){
-		// 		console.log(response);
+
 		// 	});
 		
 		// POST /layers
@@ -53,7 +52,6 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		// };
 		// layer.$save();
 		// 
-		// console.log(layer);
 		// 
 		// $scope.layerId = layer.id;
 
@@ -118,15 +116,15 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			
 			$scope.activity_level++;
 			// var state = $scope.pixels[key] !== null;
-			////console.log('toggle pixel '+key+'. Present state: '+state);
-			// console.log('hsv '+$scope.motionToHSV() );	
+
+
 			//If on, turn off ; if off, turn on.
 			$scope.pixels[key] = (state) ? null : $scope.rgb;
 			
-			//console.log('RGB' + $scope.hsvToRGB( $scope.motionToHSV() ) );
+
 			// $scope.pixels[key] = (state) ? null : [255,255,255];
 			
-			////console.log($scope.history)
+
 		
 		};
 		
@@ -162,9 +160,9 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 				var s = $scope.normalizeHSV(Math.round($scope.acc.x));
 				var l = $scope.lightness;
 				
-				// console.log('H:'+h+' S:'+s+' L:' + l);
+
 				
-				// console.log('X:'+$scope.acc.x+' Y:'+$scope.acc.y);
+
 				
 				return [h,s,l];
 			} else {
@@ -292,16 +290,18 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			
 		$scope.addFrame = function(){
 			
+			console.log($scope.pixels);
+			
 			$scope.response = $http.put(
-				'http://192.168.1.6:8888/layers/1/',
+				'http://192.168.1.6:8888/layers/1',
 				$scope.request, 
 				function(obj){
-					console.log(obj);
+					// console.log(obj);
 			});
 			
 			$scope.$watch('response', function(status, response){
-				console.log(response);
-				console.log(status);
+				// console.log(response);
+				// console.log(status);
 			});
 			
 		}
@@ -310,8 +310,8 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			$scope.hsv = $scope.motionToHSV();
 			$scope.rgb = $scope.hsvToRGB();
 			$scope.useColor = ($scope.useColor.length) ? $scope.useColor : $scope.hsv;
-			console.log('Color');
-			console.log($scope.useColor);
+			// console.log('Color');
+			// console.log($scope.useColor);
 		}
 	  
 		cancelRefresh = $timeout(function update() {
@@ -338,18 +338,6 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			
 			//Infinite loop
       cancelRefresh = $timeout(update, $scope.period);
-			
-			// $scope.useColor = false;
-			
-			
-			console.log('pixels');
-			console.log($scope.pixels)
-			console.log($scope.activity_level);
-			
-			console.log($scope.activeRule);
-			
-			console.log($scope.hsv);
-			console.log($scope.rgb);
 
 			//This beats interval, I'll explain why sometime.
     	}, $scope.period);
