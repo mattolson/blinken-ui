@@ -141,7 +141,7 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		//Normalizes accelerometer values between 0 & 255
 		$scope.normalize = function(x){
 			
-			var res = Math.round( 1 + (x-(-180)) * (255-0) / ((180)-(-180)) );
+			var res = Math.round( 1 + (x-(0)) * (255-0) / ((90)-(0)) );
 			// var res = x*20;
 			// console.log( res );
 			return res;
