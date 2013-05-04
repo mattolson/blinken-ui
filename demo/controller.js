@@ -162,9 +162,9 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 				var s = $scope.normalizeHSV(Math.round($scope.acc.x));
 				var l = $scope.lightness;
 				
-				console.log('H:'+h+' S:'+s+' L:' + l);
+				// console.log('H:'+h+' S:'+s+' L:' + l);
 				
-				console.log('X:'+$scope.acc.x+' Y:'+$scope.acc.y);
+				// console.log('X:'+$scope.acc.x+' Y:'+$scope.acc.y);
 				
 				return [h,s,l];
 			} else {
@@ -178,17 +178,17 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			switch(true) {
 				case ($scope.acc.y > 160 || $scope.acc.y < -160) :
 					$scope.activeRule = 'inverse';
-					return true;
+
 				break
 				default :
-					return false;
+	
 			}
 		};
 		
 		$scope.applyRequest = function(){
 			switch($scope.activeRule){
 				case 'inverse':
-						$scope.useColor = ['0','0','0'];
+						$scope.useColor = [0,0,0];
 						$scope.request = {
 							name : 'Frames',
 							source : {
@@ -202,6 +202,7 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 						};
 				break;
 				default:
+					$scope.useColor = $scope.rgb;
 					$scope.request = {
 						name : 'Frames',
 						source : {
@@ -308,7 +309,9 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		$scope.applyColor = function(){
 			$scope.hsv = $scope.motionToHSV();
 			$scope.rgb = $scope.hsvToRGB();
-			$scope.useColor = ($scope.useColor) ? $scope.useColor : $scope.hsv;
+			$scope.useColor = ($scope.useColor.length) ? $scope.useColor : $scope.hsv;
+			console.log('Color');
+			console.log($scope.useColor);
 		}
 	  
 		cancelRefresh = $timeout(function update() {
@@ -336,8 +339,11 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			//Infinite loop
       cancelRefresh = $timeout(update, $scope.period);
 			
-			$scope.useColor = false;
+			// $scope.useColor = false;
 			
+			
+			console.log('pixels');
+			console.log($scope.pixels)
 			console.log($scope.activity_level);
 			
 			console.log($scope.activeRule);
