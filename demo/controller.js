@@ -160,10 +160,6 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 				var s = $scope.normalizeHSV(Math.round($scope.acc.x));
 				var l = $scope.lightness;
 				
-
-				
-
-				
 				return [h,s,l];
 			} else {
 				return [255,255,255];
@@ -291,7 +287,7 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			console.log($scope.request);
 			
 			$scope.response = $http.put(
-				'http://192.168.1.6:8888/layers/1',
+				'http://192.168.1.6:8888/layers/2',
 				$scope.request, 
 				function(obj){
 					// console.log(obj);
