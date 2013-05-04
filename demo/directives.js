@@ -23,9 +23,9 @@ demo
 					// 			$scope.acc.y = (typeof e.accY === "float")  ? e.accY : $scope.acc.y;
 					// 			$scope.acc.z = (typeof e.accZ === "float")  ? e.accZ : $scope.acc.z;
 					
-					$scope.acc.x = e.accX;
-					$scope.acc.y = e.accY;
-					$scope.acc.z = e.accZ;
+					$scope.acc.x = Math.round(e.accX);
+					$scope.acc.y = Math.round(e.accY);
+					$scope.acc.z = Math.round(e.accZ);
 				});
 			}
 		};

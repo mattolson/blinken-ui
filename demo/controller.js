@@ -22,6 +22,7 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		$scope.history_limit = 13;
 		
 		$scope.hsv = [];
+		$scope.useColor = [];
 		$scope.acc = { x : 0, y : 0, z : 0 };
 		
 		$scope.period = 75;
@@ -135,16 +136,16 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			return (newhue) ? step : 0;
 		}
 		
-		$scope.cap_integer = function(value, max) {
-			return (value < max) ? value : max;
-		}
+		$scope.cap_integer = function(value, max) { return (value < max) ? value : max; }
 		
 		//Normalizes accelerometer values between 0 & 255
 		$scope.normalize = function(x){
+			
 			var res = Math.round( 1 + (x-(-180)) * (255-0) / ((180)-(-180)) );
 			// var res = x*20;
 			// console.log( res );
 			return res;
+		
 		};
 		
 		$scope.scalePeriod = function(){
@@ -154,111 +155,99 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		
 		//Take acceleratomenter data and transform into HSV
 		$scope.motionToHSV = function(){
-			// console.log('h'+$scope.normalize(Math.round($scope.acc.x)))
-			// console.log('s'+$scope.normalize(Math.round($scope.acc.y)))
-
+			
 			if($scope.acc) {
 				var h = $scope.normalize(Math.round($scope.acc.x));
 				var s = $scope.normalize(Math.round($scope.acc.y));
 				var l = $scope.lightness;
 				
+				console.log('H:'+h+' S:'+s+' L:' + l);
+				
+				console.log('X:'+$scope.acc.x+' Y:'+$scope.acc.y);
+				
 				return [h,s,l];
 			} else {
 				return [255,255,255];
 			}
+			
 		};
 		
-		// $scope.hsvToRGB = function(hsv) {
-		// 	  var h = hsv.hue, s = hsv.sat, v = hsv.val;
-		// 	  var rgb, i, data = [];
-		// 	  if (s === 0) {
-		// 	    rgb = [v,v,v];
-		// 	  } else {
-		// 	    h = h / 60;
-		// 	    i = Math.floor(h);
-		// 	    data = [v*(1-s), v*(1-s*(h-i)), v*(1-s*(1-(h-i)))];
-		// 	    switch(i) {
-		// 	      case 0: return [v, data[2], data[0]];
-		// 	      case 1: return [data[1], v, data[0]];
-		// 	      case 2: return [data[0], v, data[2]];
-		// 	      case 3: return [data[0], data[1], v];
-		// 	      case 4: return [data[2], data[0], v];
-		// 	      default: return [v, data[0], data[1]];
-		// 	    }
-		// 	  }
-		// 	  // return '#' + rgb.map(function(x){ 
-		// 	  // 		    return ("0" + Math.round(x*255).toString(16)).slice(-2);
-		// 	  // 		  }).join('');
-		// 	};
-		// 	
-		//This updates the server every so often.
+		$scope.rules = function(){
+			$scope.activeRule = false;
+			switch(true) {
+				case ($scope.acc.y > 160 || $scope.acc.y < -160) :
+					$scope.activeRule = 'inverse';
+					return true;
+				break
+				default :
+					return false;
+			}
+		};
+		
+		$scope.applyRequest = function(){
+			switch($scope.activeRule){
+				case 'inverse':
+						$scope.useColor = ['0','0','0'];
+						$scope.request = {
+							name : 'Frames',
+							source : {
+								name : 'pixel_pulse',
+								options : {
+									background: $scope.hsv,
+									colors: $scope.pixels,
+									period : $scope.period
+								}
+							}
+						};
+				break;
+				default:
+					$scope.request = {
+						name : 'Frames',
+						source : {
+							name : 'pixel_pulse',
+							options : {
+								colors: $scope.pixels,
+								period : $scope.period
+							}
+						}
+					};
+			}
+		}
+		
 		var update = function() {
 			
 		$scope.addFrame = function(){
 			
 			$scope.response = $http.put(
 				'http://192.168.1.6:8888/layers/4/',
-				{
-					source : {
-						name : 'pixel_pulse',
-						options : {
-							colors: $scope.pixels,
-							period : $scope.period
-						}
-					}
-				});
+				$scope.request, 
+				function(obj){
+					console.log(obj.id);
+			});
 			
 			$scope.$watch('response', function(status, response){
 				console.log(status+response);
 			});
 			
-			
-			// var frame = Frame.save({},{
-			// 				source : {
-			// 					name : 'pixel_pulse',
-			// 					options : {
-			// 						colors: $scope.pixels,
-			// 						period : $scope.period
-			// 					}
-			// 				}
-			// 			},function(frame, response){
-			// 					console.log('Node informed, it says '+response + ' for '+ frame);
-			// 					////console.log('Node informed.');
-			// 			}, function(status, error){
-			// 				console.log(status+error);
-			// 			});
-			// 			
-			// 			console.log(frame);
-			
-			// console.log(frame);
 		}
-	   
+		
+		$scope.applyColor = function(){
+			$scope.useColor = ($scope.useColor) ? $scope.useColor : $scope.hsv;
+		}
+	  
 		cancelRefresh = $timeout(function update() {
 			//If running a cheat/hack (lioke the shake=sparkle hack) you can pause the timeline here.
 			if($scope.pause) return true;			
-			////console.log('refreshing');
+			
+			$scope.rules();
+			
+			$scope.applyColor();
 			
 			$scope.scalePeriod();
 			
-			//console.log('total frames in history: '+$scope.history.length)
-			
-			////console.log('Total pixels per frame: '+$scope.pixels.length);
-			//Activity based "sessions."
 			$scope.session();
-			
-			// var frame = new Frame();
-			// 		frame.source = {
-			// 			name : 'pixel_pulse',
-			// 			options : {
-			// 				'colors': $scope.pixels,
-			// 				'period' : $scope.period
-			// 			}
-			// 		};
-			// 		frame.$update();
-			
-			//
-			// console.log(frame);
-			
+
+
 			if($scope.isPixels()) $scope.addFrame();
 			else $scope.activity_level = ($scope.activity_level > 0) ? $scope.activity_level-1 : 0;
 			
@@ -269,12 +258,15 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			$scope.purge();
 			
 			//Infinite loop
-       cancelRefresh = $timeout(update, $scope.period);
+      cancelRefresh = $timeout(update, $scope.period);
 
 			$scope.hsv = $scope.motionToHSV();
 			
-			console.log($scope.hsv);
+			$scope.useColor = false;
+			
 			console.log($scope.activity_level);
+			
+			console.log($scope.activeRule);
 
 			//This beats interval, I'll explain why sometime.
     	}, $scope.period);
