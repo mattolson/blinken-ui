@@ -176,23 +176,22 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			switch(true) {
 				case ($scope.acc.y > 160 || $scope.acc.y < -160) :
 					$scope.activeRule = 'inverse';
-
+					$scope.useColor = [0,0,0];
 				break
 				default :
-	
+					$scope.useColor = $scope.rgb;
 			}
 		};
 		
 		$scope.applyRequest = function(){
 			switch($scope.activeRule){
 				case 'inverse':
-						$scope.useColor = [0,0,0];
 						$scope.request = {
 							name : 'Frames',
 							source : {
 								name : 'pixel_pulse',
 								options : {
-									background: $scope.hsv,
+									background: $scope.rgb,
 									colors: $scope.pixels,
 									period : $scope.period
 								}
@@ -200,7 +199,6 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 						};
 				break;
 				default:
-					$scope.useColor = $scope.rgb;
 					$scope.request = {
 						name : 'Frames',
 						source : {
@@ -290,7 +288,7 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			
 		$scope.addFrame = function(){
 			
-			console.log($scope.pixels);
+			console.log($scope.request);
 			
 			$scope.response = $http.put(
 				'http://192.168.1.6:8888/layers/1',
@@ -309,7 +307,7 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		$scope.applyColor = function(){
 			$scope.hsv = $scope.motionToHSV();
 			$scope.rgb = $scope.hsvToRGB();
-			$scope.useColor = ($scope.useColor.length) ? $scope.useColor : $scope.hsv;
+			$scope.useColor = ($scope.useColor.length) ? $scope.useColor : $scope.rgb;
 			// console.log('Color');
 			// console.log($scope.useColor);
 		}
@@ -325,7 +323,8 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			$scope.scalePeriod();
 			
 			$scope.session();
-
+			
+			$scope.applyRequest();
 
 			if($scope.isPixels()) $scope.addFrame();
 			else $scope.activity_level = ($scope.activity_level > 0) ? $scope.activity_level-1 : 0;
