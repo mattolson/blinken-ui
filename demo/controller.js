@@ -7,7 +7,8 @@ demo = angular.module('app', ['ngResource']);
 
 function PixelPad($scope, $timeout, $http, Frame, Layers){
 	
-		$scope.lightness = 200;
+		// $scope.lightness = 0.5;
+		$scope.lightness = 150;
 		
 		//console.log('Controller: PixelPad');
 		
@@ -22,6 +23,7 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		$scope.history_limit = 13;
 		
 		$scope.hsv = [];
+		$scope.rgb = [];
 		$scope.useColor = [];
 		$scope.acc = { x : 0, y : 0, z : 0 };
 		
@@ -119,7 +121,7 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			////console.log('toggle pixel '+key+'. Present state: '+state);
 			// console.log('hsv '+$scope.motionToHSV() );	
 			//If on, turn off ; if off, turn on.
-			$scope.pixels[key] = (state) ? null : $scope.hsv;
+			$scope.pixels[key] = (state) ? null : $scope.rgb;
 			
 			//console.log('RGB' + $scope.hsvToRGB( $scope.motionToHSV() ) );
 			// $scope.pixels[key] = (state) ? null : [255,255,255];
@@ -139,11 +141,10 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		$scope.cap_integer = function(value, max) { return (value < max) ? value : max; }
 		
 		//Normalizes accelerometer values between 0 & 255
-		$scope.normalize = function(x){
+		$scope.normalizeHSV = function(x){
 			
-			var res = Math.round( 1 + (x-(0)) * (255-0) / ((90)-(0)) );
-			// var res = x*20;
-			// console.log( res );
+			var res = Math.round( 0 + (x-(-180)) * (255-0) / ((180)-(-180)));
+			// var res = Math.round( 0 + (x-(-180)) * (1-0) / ((180)-(-180)) * 100 ) / 100;
 			return res;
 		
 		};
@@ -157,8 +158,8 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		$scope.motionToHSV = function(){
 			
 			if($scope.acc) {
-				var h = $scope.normalize(Math.round($scope.acc.x));
-				var s = $scope.normalize(Math.round($scope.acc.y));
+				var h = $scope.normalizeHSV(Math.round($scope.acc.y));
+				var s = $scope.normalizeHSV(Math.round($scope.acc.x));
 				var l = $scope.lightness;
 				
 				console.log('H:'+h+' S:'+s+' L:' + l);
@@ -214,6 +215,78 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			}
 		}
 		
+		$scope.hsvToRGB = function(){
+			var r, g, b;
+			var i;
+			var f, p, q, t;
+			
+			var h = $scope.hsv[0], s = $scope.hsv[1], v = $scope.hsv[2];
+
+			// Make sure our arguments stay in-range
+			h = Math.max(0, Math.min(360, h));
+			s = Math.max(0, Math.min(100, s));
+			v = Math.max(0, Math.min(100, v));
+
+			// We accept saturation and value arguments from 0 to 100 because that's
+			// how Photoshop represents those values. Internally, however, the
+			// saturation and value are calculated from a range of 0 to 1. We make
+			// That conversion here.
+			s /= 100;
+			v /= 100;
+
+			if(s == 0) {
+				// Achromatic (grey)
+				r = g = b = v;
+				return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+			}
+
+			h /= 60; // sector 0 to 5
+			i = Math.floor(h);
+			f = h - i; // factorial part of h
+			p = v * (1 - s);
+			q = v * (1 - s * f);
+			t = v * (1 - s * (1 - f));
+
+			switch(i) {
+				case 0:
+					r = v;
+					g = t;
+					b = p;
+					break;
+
+				case 1:
+					r = q;
+					g = v;
+					b = p;
+					break;
+
+				case 2:
+					r = p;
+					g = v;
+					b = t;
+					break;
+
+				case 3:
+					r = p;
+					g = q;
+					b = v;
+					break;
+
+				case 4:
+					r = t;
+					g = p;
+					b = v;
+					break;
+
+				default: // case 5:
+					r = v;
+					g = p;
+					b = q;
+			}
+
+			return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+		}
+		
 		var update = function() {
 			
 		$scope.addFrame = function(){
@@ -233,6 +306,8 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		}
 		
 		$scope.applyColor = function(){
+			$scope.hsv = $scope.motionToHSV();
+			$scope.rgb = $scope.hsvToRGB();
 			$scope.useColor = ($scope.useColor) ? $scope.useColor : $scope.hsv;
 		}
 	  
@@ -260,18 +335,21 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			
 			//Infinite loop
       cancelRefresh = $timeout(update, $scope.period);
-
-			$scope.hsv = $scope.motionToHSV();
 			
 			$scope.useColor = false;
 			
 			console.log($scope.activity_level);
 			
 			console.log($scope.activeRule);
+			
+			console.log($scope.hsv);
+			console.log($scope.rgb);
 
 			//This beats interval, I'll explain why sometime.
     	}, $scope.period);
 		};
+		
+		
 		
 		update();
 		
@@ -389,3 +467,6 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 	myShakeEvent.start();
 
 }(window, document));
+
+
+
