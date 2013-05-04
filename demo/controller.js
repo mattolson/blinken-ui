@@ -222,11 +222,12 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 				'http://192.168.1.6:8888/layers/3/',
 				$scope.request, 
 				function(obj){
-					console.log(obj.id);
+					console.log(obj);
 			});
 			
 			$scope.$watch('response', function(status, response){
-				console.log(status+response);
+				console.log(response);
+				console.log(status);
 			});
 			
 		}
