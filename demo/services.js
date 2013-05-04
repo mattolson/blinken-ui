@@ -5,6 +5,37 @@ var PORT = 8888;
 
 demo
 
+	// 
+	// .service('Source', function($resource){
+	// 	// Source resource
+	// 	      var Source = $resource('http://leds.dev\\:8888/sources/:source_id',
+	// 	        { 'source_id': '@id' },
+	// 	        { 'update': {method: 'PUT'} }
+	// 	      );
+	// 		  return Source;
+	// 
+	// 	      // Layer resource
+	// 	      var Layer = $resource('http://leds.dev\\:8888/layers/:layer_id',
+	// 	        { 'layer_id': '@id' },
+	// 	        { 'update': {method: 'PUT'} }
+	// 	      );
+	// 				return Layer;
+	// 
+	// 	      // GET /sources
+	// 	      var sources = Source.query(function() {
+	// 	        console.log("sources = " + sources);
+	// 	      });
+	// 				return Sources;
+	// 
+	// 	      // GET /layers
+	// 	      var layers = Layer.query(function() {
+	// 	        console.log("layers = " + layers);
+	// 	      });
+	// 				return layers;
+	// })
+	// 
+	// .service
+
 	.factory('Frame', function ($resource) {
 		return $resource( 
 			'http://192.168.1.6:port/layers/:id/', 

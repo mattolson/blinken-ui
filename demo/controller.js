@@ -9,7 +9,7 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 	
 		$scope.lightness = 200;
 		
-		////console.log('Controller: PixelPad');
+		//console.log('Controller: PixelPad');
 		
 		$scope.defaults = [255,255,255];
 		
@@ -36,11 +36,37 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		$scope.color_phase.steps = 255;
 		$scope.color_phase.step = 0;
 		
-		
-		
 		// var layers = Layers.get({}, function(response){
 		// 		console.log(response);
 		// 	});
+		
+		// POST /layers
+		$scope.layer = new Layer();
+		layer.source = {
+		 name: 'pixel_pulse',
+		 options: {
+		   color: [255,0,0]
+		 }
+		};
+		layer.$save();
+		
+		console.log(layer);
+		
+		$scope.layerId = layer.id;
+
+  // PUT /layers/:id
+  // var randomizer = setInterval(function() {
+  //   // Change to random color every two seconds
+  //   layer0.source.options.color = [Math.floor(Math.random()*255.0), Math.floor(Math.random()*255.0), Math.floor(Math.random()*255.0)]; 
+  //   layer0.$update();
+  // }, 2000);
+  // 
+  // // DELETE /layers/:id
+  // setTimeout(function() {
+  //   clearInterval(randomizer);
+  //   layer0.$remove();
+  // }, 10000);
+		
 		
 		
 		//Cancels timeout in case views disrupts us, fail safe
