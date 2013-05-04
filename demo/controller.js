@@ -41,18 +41,18 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		// 	});
 		
 		// POST /layers
-		$scope.layer = new Layer();
-		layer.source = {
-		 name: 'pixel_pulse',
-		 options: {
-		   color: [255,0,0]
-		 }
-		};
-		layer.$save();
-		
-		console.log(layer);
-		
-		$scope.layerId = layer.id;
+		// $scope.layer = new Layer();
+		// layer.source = {
+		//  name: 'pixel_pulse',
+		//  options: {
+		//    color: [255,0,0]
+		//  }
+		// };
+		// layer.$save();
+		// 
+		// console.log(layer);
+		// 
+		// $scope.layerId = layer.id;
 
   // PUT /layers/:id
   // var randomizer = setInterval(function() {
