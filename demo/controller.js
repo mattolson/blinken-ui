@@ -18,7 +18,7 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		$scope.active = false;
 		
 		//If on mobile and holds it will perform special functionality.
-		$scope.hold = false;
+		$scope.hold = [false,false,false];
 		
 		$scope.pixels = [ null, null, null ];
 		$scope.history = [];
@@ -283,12 +283,12 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 		}
 		
-		$scope.holding = function(){
-			$scope.hold = true;
+		$scope.holding = function(key){
+			$scope.hold[key] = true;
 		}
 
-		$scope.release = function(){
-			$scope.hold = false;
+		$scope.release = function(key){
+			$scope.hold[key] = false;
 		}
 		
 		var update = function() {
@@ -318,6 +318,12 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			// console.log('Color');
 			// console.log($scope.useColor);
 		}
+		
+		$scope.doHolds = function(){
+			for(var i=0;i<3;i++) {
+				if($scope.hold[i] === true) $scope.pixels[i] = $scope.useColor;
+			}
+		}
 	  
 		cancelRefresh = $timeout(function update() {
 			//If running a cheat/hack (lioke the shake=sparkle hack) you can pause the timeline here.
@@ -327,13 +333,15 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			
 			$scope.applyColor();
 			
+			$scope.doHolds();
+			
 			$scope.scalePeriod();
 			
 			$scope.session();
 			
 			$scope.applyRequest();
 
-			if($scope.isPixels() || $scope.hold === true) $scope.addFrame();
+			if($scope.isPixels()) $scope.addFrame();
 			else $scope.activity_level = ($scope.activity_level > 0) ? $scope.activity_level-1 : 0;
 			
 			//Cache the data (history)

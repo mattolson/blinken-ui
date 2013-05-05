@@ -20,8 +20,8 @@
 			pixelpad
 			class="pixelpad" 
 			ng-mousedown="togglePixel(0)" 
-			hm-hold="holding()"
-			hm-release="release()"
+			hm-hold="holding(0)"
+			hm-release="release(0)"
 			style="background:hsl({{hsv[0]}},{{hsv[1]}},{{hsv[2]}})">
 			</div>
 			
@@ -29,16 +29,16 @@
 			pixelpad
 			class="pixelpad"
 			ng-mousedown="togglePixel(1)"
-			hm-hold="holding()"
-			hm-release="release()"
+			hm-hold="holding(1)"
+			hm-release="release(1)"
 			style="background:hsl({{hsv[0]}},{{hsv[1]}},{{hsv[2]}})">
 				</div>
 				
 		<div 
 			pixelpad
 			class="pixelpad"
-			hm-hold="holding()"
-			hm-release="release()" 
+			hm-hold="holding(2)"
+			hm-release="release(2)" 
 			ng-mousedown="togglePixel(2)" 
 			style="background:hsl({{hsv[0]}},{{hsv[1]}},{{hsv[2]}})">
 				</div>
