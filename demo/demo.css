@@ -1,6 +1,13 @@
+
 body, html {height:100%;}
 /*Layout*/
 #right, #left, #center {float:left;}
+
+header {position:absolute;z-index:1000;top:0px;left:0px;right:0px; height:25px; background:#000}
+header * {color:#fff;font-size:10px;text-transform:uppercase;letter-spacing:1px; font-weight:bold; display:inline-block; padding:2px 5px;}
+header .left {float:left; }
+header .right {float:right;}
+
 
 /*#left {display:none;}*/
 /*#right, #left { position:absolute;top:0px;bottom:0px;width:10%; height:100%; }
