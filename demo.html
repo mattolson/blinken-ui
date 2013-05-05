@@ -16,10 +16,32 @@
 	<div acc-data shake>
 	
 	<section id="left" class="controller">
-			{{acc.x}}<br/>
-			{{acc.y}}<br/>
-			{{acc.z}}<br><br>
-			background:hsl({{hsv[0]}},{{hsv[1]}},{{hsv[2]}})
+		<div 
+			pixelpad
+			class="pixelpad" 
+			ng-mousedown="togglePixel(0)" 
+			hm-hold="holding()"
+			hm-release="release()"
+			style="background:hsl({{hsv[0]}},{{hsv[1]}},{{hsv[2]}})">
+			</div>
+			
+		<div 
+			pixelpad
+			class="pixelpad"
+			ng-mousedown="togglePixel(1)"
+			hm-hold="holding()"
+			hm-release="release()"
+			style="background:hsl({{hsv[0]}},{{hsv[1]}},{{hsv[2]}})">
+				</div>
+				
+		<div 
+			pixelpad
+			class="pixelpad"
+			hm-hold="holding()"
+			hm-release="release()" 
+			ng-mousedown="togglePixel(2)" 
+			style="background:hsl({{hsv[0]}},{{hsv[1]}},{{hsv[2]}})">
+				</div>
 	</section>
 	
 	<section id="center" class="timeline">
@@ -42,6 +64,8 @@
 			pixelpad
 			class="pixelpad" 
 			ng-mousedown="togglePixel(0)" 
+			hm-hold="holding()"
+			hm-release="release()"
 			style="background:hsl({{hsv[0]}},{{hsv[1]}},{{hsv[2]}})">
 			</div>
 			
@@ -49,12 +73,16 @@
 			pixelpad
 			class="pixelpad"
 			ng-mousedown="togglePixel(1)"
+			hm-hold="holding()"
+			hm-release="release()"
 			style="background:hsl({{hsv[0]}},{{hsv[1]}},{{hsv[2]}})">
 				</div>
 				
 		<div 
 			pixelpad
-			class="pixelpad" 
+			class="pixelpad"
+			hm-hold="holding()"
+			hm-release="release()" 
 			ng-mousedown="togglePixel(2)" 
 			style="background:hsl({{hsv[0]}},{{hsv[1]}},{{hsv[2]}})">
 				</div>

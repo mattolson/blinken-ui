@@ -17,6 +17,9 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 		
 		$scope.active = false;
 		
+		//If on mobile and holds it will perform special functionality.
+		$scope.hold = false;
+		
 		$scope.pixels = [ null, null, null ];
 		$scope.history = [];
 		$scope.history_limit = 13;
@@ -280,6 +283,14 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 		}
 		
+		$scope.holding = function(){
+			$scope.hold = true;
+		}
+
+		$scope.release = function(){
+			$scope.hold = false;
+		}
+		
 		var update = function() {
 			
 		$scope.addFrame = function(){
@@ -322,7 +333,7 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			
 			$scope.applyRequest();
 
-			if($scope.isPixels()) $scope.addFrame();
+			if($scope.isPixels() || $scope.hold === true) $scope.addFrame();
 			else $scope.activity_level = ($scope.activity_level > 0) ? $scope.activity_level-1 : 0;
 			
 			//Cache the data (history)

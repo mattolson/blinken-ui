@@ -90,7 +90,7 @@ demo
 	 * or any other of the "hm-event" listed underneath.
 	 */
 
-	angular.forEach('hmTap:tap hmDoubletap:doubletap hmHold:hold hmTransformstart:transformstart hmTransform:transform hmTransforend:transformend hmDragstart:dragstart hmDrag:drag hmDragend:dragend hmDragup:dragup hmDragdown:dragdown hmDragleft:dragleft hmDragright:dragright hmSwipe:swipe hmRelease:release'.split(' '), function(name) {
+	angular.forEach('hmTap:tap hmDoubletap:doubletap hmHold:hold hmRelease:hmrelease hmTransformstart:transformstart hmTransform:transform hmTransforend:transformend hmDragstart:dragstart hmDrag:drag hmDragend:dragend hmDragup:dragup hmDragdown:dragdown hmDragleft:dragleft hmDragright:dragright hmSwipe:swipe hmRelease:release'.split(' '), function(name) {
 	  var directive = name.split(':');
 	  var directiveName = directive[0];
 	  var eventName = directive[1];
