@@ -298,7 +298,7 @@ function PixelPad($scope, $timeout, $http, Frame, Layers){
 			console.log($scope.request);
 			
 			$scope.response = $http.put(
-				'http://192.168.1.6:8888/layers/2',
+				'http://192.168.1.6:8888/layers/1',
 				$scope.request, 
 				function(obj){
 					// console.log(obj);
